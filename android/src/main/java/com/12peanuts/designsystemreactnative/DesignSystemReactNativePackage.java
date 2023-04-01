@@ -1,4 +1,4 @@
-package com.12peanuts.designsystemreactnative;
+package com.twelvepeanuts.designsystemreactnative;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;

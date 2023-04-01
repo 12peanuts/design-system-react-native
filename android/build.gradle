@@ -72,6 +72,6 @@ if (isNewArchitectureEnabled()) {
   react {
     jsRootDir = file("../src/")
     libraryName = "DesignSystemReactNativeView"
-    codegenJavaPackageName = "com.12peanuts.designsystemreactnative"
+    codegenJavaPackageName = "com.twelvepeanuts.designsystemreactnative"
   }
 }

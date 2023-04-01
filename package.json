@@ -41,13 +41,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/12peanuts/design-systtem-react-native",
+  "repository": "https://github.com/12peanuts/design-system-react-native",
   "author": "hx2ryu <hx2ryu@gmail.com> (https://github.com/hx2ryu)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/12peanuts/design-systtem-react-native/issues"
+    "url": "https://github.com/12peanuts/design-system-react-native/issues"
   },
-  "homepage": "https://github.com/12peanuts/design-systtem-react-native#readme",
+  "homepage": "https://github.com/12peanuts/design-system-react-native#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

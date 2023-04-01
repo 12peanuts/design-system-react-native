@@ -1,4 +1,4 @@
-package com.12peanuts.designsystemreactnative;
+package com.twelvepeanuts.designsystemreactnative;
 
 import android.graphics.Color;
 import android.view.View;
