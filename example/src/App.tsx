@@ -1,12 +1,14 @@
 import * as React from 'react';
-
 import { StyleSheet, View } from 'react-native';
 import { DesignSystemReactNativeView } from '@12peanuts/design-system-react-native';
+import StorybookUIRoot from '../.storybook';
+
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <DesignSystemReactNativeView color="#32a852" style={styles.box} />
+      <StorybookUIRoot />
+      {/* <DesignSystemReactNativeView color="#32a852" style={styles.box} /> */}
     </View>
   );
 }
