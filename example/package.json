@@ -7,11 +7,13 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "pods": "pod-install --quiet",
-    "storybook-generate": "sb-rn-get-stories",
-    "storybook-watch": "sb-rn-watcher",
-    "server": "react-native-storybook-server"
+    "sb:gen": "sb-rn-get-stories",
+    "sb:watch": "sb-rn-watcher",
+    "sb:server": "react-native-storybook-server"
   },
   "dependencies": {
+    "@emotion/native": "^11.10.6",
+    "@emotion/react": "^11.10.6",
     "react": "18.2.0",
     "react-native": "0.71.5"
   },

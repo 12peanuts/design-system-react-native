@@ -1,11 +1,6 @@
-import { View } from "react-native";
+import { withTheme } from './withTheme.decorator';
 
-export const decorators = [
-  (StoryFn) => (
-    <View style={{flex: 1, padding: 16}}>
-      <StoryFn/>
-    </View>)
-]
+export const decorators = [withTheme];
 
 export const parameters = {
   controls: {
