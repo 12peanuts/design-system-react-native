@@ -1,0 +1,3 @@
+{
+  "extends": ["@12peanuts/eslint-config-react"]
+}
