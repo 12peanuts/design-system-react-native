@@ -1,6 +1,6 @@
 {
   "name": "@12peanuts/design-system-react-native",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -49,11 +49,15 @@
   },
   "homepage": "https://github.com/12peanuts/design-system-react-native#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "devDependencies": {
-    "@evilmartians/lefthook": "^1.2.2",
+    "@12peanuts/eslint-config-react": "^1.0.0",
     "@commitlint/config-conventional": "^17.0.2",
+    "@emotion/native": "^11.10.6",
+    "@emotion/react": "^11.10.6",
+    "@evilmartians/lefthook": "^1.2.2",
     "@react-native-community/eslint-config": "^3.0.2",
     "@release-it/conventional-changelog": "^5.0.0",
     "@types/jest": "^28.1.2",
