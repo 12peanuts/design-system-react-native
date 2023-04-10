@@ -20,7 +20,7 @@ export const Layout: React.FC<LayoutProps> = ({
   spacing = 12,
   ...props
 }) => {
-  const overriddenChildren = Children.toArray(children)
+  const childrenElements = Children.toArray(children)
     .filter((element) => isValidElement(element))
     .map((element, index, elements) => {
       const reactElement = element as ReactElement;
@@ -43,7 +43,7 @@ export const Layout: React.FC<LayoutProps> = ({
     });
   return (
     <LayoutContainer orientation={orientation} {...props}>
-      {overriddenChildren}
+      {childrenElements}
     </LayoutContainer>
   );
 };
