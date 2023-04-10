@@ -1,24 +1,21 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
+import { ThemeProvider } from '@12peanuts/design-system-react-native';
 import StorybookUIRoot from '../.storybook';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <StorybookUIRoot />
-    </View>
+    <ThemeProvider>
+      <View
+        style={{
+          flex: 1,
+          paddingHorizontal: 20,
+          paddingVertical: 100,
+          backgroundColor: '#343a40',
+        }}
+      >
+        <StorybookUIRoot />
+      </View>
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
-  },
-});

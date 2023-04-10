@@ -1,6 +1,4 @@
-import { withTheme } from './withTheme.decorator';
-
-export const decorators = [withTheme];
+export const decorators = [(StoryFn) => <StoryFn />];
 
 export const parameters = {
   controls: {
