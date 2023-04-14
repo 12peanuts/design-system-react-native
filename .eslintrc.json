@@ -1,9 +1,0 @@
-{
-  "extends": ["@12peanuts/eslint-config-react"],
-  "rules": {
-    "import/no-extraneous-dependencies": 0,
-    "react/jsx-filename-extension": 0,
-    "import/no-unresolved": 0,
-    "operator-linebreak": 0
-  }
-}
