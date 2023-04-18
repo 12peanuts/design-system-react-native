@@ -5,4 +5,5 @@ export * from './components/Layout';
 export * from './components/Text';
 export * from './components/Checkbox';
 export * from './components/Tag';
+export * from './components/Popup';
 export * from './theme';
