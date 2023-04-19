@@ -6,7 +6,7 @@ export const LayoutContainer = styled.View<LayoutProps>`
     padding: 0 16px;
 
     ${(props) => {
-        const padding = ScreenPadding[props.topPadding || 'None'];
+        const padding = ScreenPadding[props.padding || 'None'];
         return css`
             flex-direction: ${props.orientation === 'horizontal' ? 'row' : 'column'};
             padding-top: ${props.topPadding ? ScreenPadding[props.topPadding] : padding};
