@@ -6,6 +6,8 @@ import { RadiusSize } from '../../shared';
 import { Button } from '../Button';
 import { Text } from '../Text';
 
+export type PopupContainerProps = Pick<PopupProps, 'radius'>;
+
 export const PopupBackground = styled.Pressable`
     flex: 1;
     background-color: rgba(0, 0, 0, 0.5);
@@ -13,7 +15,6 @@ export const PopupBackground = styled.Pressable`
     padding: 30px;
 `;
 
-export type PopupContainerProps = Pick<PopupProps, 'radius'>;
 export const PopupContainer = styled.View<PopupContainerProps>`
     ${(props) => {
         return css`
@@ -22,10 +23,6 @@ export const PopupContainer = styled.View<PopupContainerProps>`
         `;
     }}
 `;
-
-export const PopupTextArea = styled.View``;
-
-export const PopupAdditionalItemArea = styled.View``;
 
 export const PopupButtonArea = styled.View`
     background-color: blue;
