@@ -1,14 +1,26 @@
 import React from 'react';
 import type { PopupProps } from './Popup';
-import { Layout } from '../Layout';
-import { StyledPopupText } from './Popup.styles';
+import { Layout, LayoutProps } from '../Layout';
+import { WrappedPopupText } from './Popup.styles';
+import type { TextProps } from '../Text';
+import { useTheme } from '@emotion/react';
 
 export type PopupTextProps = Pick<PopupProps, 'radius'> & {
     title?: string;
+    titleTextProps?: TextProps;
     description?: string;
+    descriptionTextProps?: TextProps;
+    containerProps?: LayoutProps;
 };
 
-export const PopupText: React.FC<PopupTextProps> = ({ title, description }) => {
+export const PopupText: React.FC<PopupTextProps> = ({
+    title,
+    titleTextProps,
+    description,
+    descriptionTextProps,
+    containerProps,
+}) => {
+    const { colors } = useTheme();
     return (
         <Layout
             orientation="vertical"
@@ -16,9 +28,18 @@ export const PopupText: React.FC<PopupTextProps> = ({ title, description }) => {
             bottomPadding="Large"
             leftPadding="Large"
             rightPadding="Large"
+            {...containerProps}
         >
-            <StyledPopupText>{title}</StyledPopupText>
-            <StyledPopupText>{description}</StyledPopupText>
+            {title && (
+                <WrappedPopupText color={colors.gray800} {...titleTextProps}>
+                    {title}
+                </WrappedPopupText>
+            )}
+            {description && (
+                <WrappedPopupText color={colors.gray600} {...descriptionTextProps}>
+                    {description}
+                </WrappedPopupText>
+            )}
         </Layout>
     );
 };
