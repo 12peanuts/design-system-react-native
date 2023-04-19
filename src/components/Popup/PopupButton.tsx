@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout } from '../Layout';
+import { Layout, LayoutProps } from '../Layout';
 import { Button, ButtonProps } from '../Button';
 import type { StyleProp, ViewStyle } from 'react-native';
 
@@ -7,12 +7,13 @@ export interface PopupButtonProps {
     style?: StyleProp<ViewStyle>;
     primaryButtonProps: ButtonProps;
     secondaryButtonProps?: ButtonProps;
+    containerProps?: LayoutProps;
 }
 
 export const PopupButton: React.FC<PopupButtonProps> = ({
     primaryButtonProps,
     secondaryButtonProps,
-    style,
+    containerProps,
 }) => {
     return (
         <Layout
@@ -21,7 +22,7 @@ export const PopupButton: React.FC<PopupButtonProps> = ({
             bottomPadding="Large"
             leftPadding="Large"
             rightPadding="Large"
-            style={style}
+            {...containerProps}
         >
             <Button {...primaryButtonProps} />
             {secondaryButtonProps && <Button {...secondaryButtonProps} />}
