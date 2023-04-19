@@ -30,13 +30,17 @@ export const PopupButtonArea = styled.View`
 `;
 
 export const StyledPopupImage = styled.Image<PopupImageProps>`
+    width: 100%;
+
     ${(props) => {
         const radius = RadiusSize[props.radius || 'Large'];
         return css<ImageStyle>`
-            border-top-left-radius: ${radius};
-            border-top-right-radius: ${radius};
+            border-top-left-radius: ${props.borderTopLeftRadius || radius};
+            border-top-right-radius: ${props.borderTopRightRadius || radius};
+            border-bottom-left-radius: ${props.borderBottomLeftRadius || radius};
+            border-bottom-right-radius: ${props.borderBottomLeftRadius || radius};
         `;
-    }}
+    }};
 `;
 
 export const PopupCloseButton = styled(Button)`
@@ -46,6 +50,6 @@ export const PopupCloseButton = styled(Button)`
     z-index: 1;
 `;
 
-export const StyledPopupText = styled(Text)`
+export const WrappedPopupText = styled(Text)`
     text-align: center;
 `;
