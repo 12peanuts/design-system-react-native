@@ -49,7 +49,7 @@ export const TextInput: React.FC<TextInputProps> = ({
                     {title}
                 </Text>
                 {title && required && (
-                    <RequiredText isBold varient="h6" color="error">
+                    <RequiredText isBold varient="h6">
                         *
                     </RequiredText>
                 )}

@@ -56,6 +56,7 @@ export const Input = styled.TextInput`
 
 export const RequiredText = styled(Text)`
     margin-left: 4px;
+    color: ${(props) => props.theme.colors.error};
 `;
 
 export const ClearButton = styled(Button)`
