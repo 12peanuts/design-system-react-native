@@ -6,7 +6,7 @@ import { LayoutContainer } from './Layout.styles';
 export interface LayoutProps extends ViewProps {
     orientation?: Orientation;
     spacing?: number;
-    padding?: ScreenPaddingType;
+    paddingAll?: ScreenPaddingType;
     topPadding?: ScreenPaddingType;
     bottomPadding?: ScreenPaddingType;
     leftPadding?: ScreenPaddingType;
