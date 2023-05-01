@@ -27,7 +27,7 @@ export const typographyStyle = (props: TypographyProps) => {
     return css`
         font-size: ${fontSize};
         font-weight: ${isBold ? '600' : fontWeight};
-        color: ${color || theme.colors.gray800};
+        color: ${color || theme.colors.text100};
         font-family: ${fontFamily};
     `;
 };
