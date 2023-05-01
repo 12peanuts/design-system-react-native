@@ -10,7 +10,7 @@ export const TextInputContainer = styled.View<TextInputContainerProps>`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-radius: ${(props) => RadiusSize[props.radius || 'Medium']};
+    border-radius: ${(props) => RadiusSize[props.radius || 'XLarge']};
     padding: 14px 16px;
     margin: 8px 0;
 
