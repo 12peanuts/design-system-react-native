@@ -44,16 +44,18 @@ export const TextInput: React.FC<TextInputProps> = ({
 
     return (
         <View style={style}>
-            <TextInputTitleArea>
-                <Text isBold varient="h6">
-                    {title}
-                </Text>
-                {title && required && (
-                    <RequiredText isBold varient="h6">
-                        *
-                    </RequiredText>
-                )}
-            </TextInputTitleArea>
+            {title && (
+                <TextInputTitleArea>
+                    <Text isBold varient="h6">
+                        {title}
+                    </Text>
+                    {required && (
+                        <RequiredText isBold varient="h6">
+                            *
+                        </RequiredText>
+                    )}
+                </TextInputTitleArea>
+            )}
             <TextInputContainer type={type} radius={radius}>
                 <Input onChangeText={handleChangeText} {...textProps} {...props} />
                 {canClean && (
@@ -64,9 +66,11 @@ export const TextInput: React.FC<TextInputProps> = ({
                     />
                 )}
             </TextInputContainer>
-            <TextInputHelpTextArea>
-                <Text>{helpText}</Text>
-            </TextInputHelpTextArea>
+            {helpText && (
+                <TextInputHelpTextArea>
+                    <Text>{helpText}</Text>
+                </TextInputHelpTextArea>
+            )}
         </View>
     );
 };
