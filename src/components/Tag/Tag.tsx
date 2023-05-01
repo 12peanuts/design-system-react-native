@@ -13,16 +13,17 @@ export interface TagProps extends ViewProps {
     contentsSpacing?: number;
     iconSrc?: ImageSourcePropType;
     iconColor?: keyof Theme['colors'];
+    color?: string;
 }
 
 export const Tag: React.FC<TagProps> = ({
     text,
     type = 'contained',
-    radius = 'Large',
     iconSrc,
     iconColor,
     textProps,
     contentsSpacing = 8,
+    color,
     ...props
 }) => {
     const { colors } = useTheme();
@@ -31,11 +32,15 @@ export const Tag: React.FC<TagProps> = ({
     const iconMarginRight = isIconOnly ? 0 : contentsSpacing;
 
     return (
-        <TagContainer type={type} radius={radius} {...props}>
+        <TagContainer type={type} color={color} {...props}>
             {iconSrc && (
                 <Image source={iconSrc} style={{ marginRight: iconMarginRight, tintColor }} />
             )}
-            {text && <Text {...textProps}>{text}</Text>}
+            {text && (
+                <Text color={color} {...textProps}>
+                    {text}
+                </Text>
+            )}
         </TagContainer>
     );
 };

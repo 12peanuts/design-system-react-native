@@ -6,15 +6,15 @@ export const TagContainer = styled.View<TagProps>`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 12px 18px;
-    border-radius: ${(props) => RadiusSize[props.radius || 'None']};
+    padding: 4px 8px;
+    border-radius: ${(props) => RadiusSize[props.radius || 'Medium']};
 
     ${(props) => {
-        const { theme, type } = props;
+        const { theme, type, color } = props;
         switch (type) {
             case 'contained':
                 return css`
-                    background-color: ${theme.colors.primary};
+                    background-color: ${color || theme.colors.primary}4d;
                 `;
             case 'outlined':
                 return css`
