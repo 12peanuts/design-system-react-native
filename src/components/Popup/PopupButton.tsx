@@ -16,14 +16,7 @@ export const PopupButton: React.FC<PopupButtonProps> = ({
     containerProps,
 }) => {
     return (
-        <Layout
-            orientation="vertical"
-            topPadding="Large"
-            bottomPadding="Large"
-            leftPadding="Large"
-            rightPadding="Large"
-            {...containerProps}
-        >
+        <Layout orientation="vertical" paddingAll="Large" {...containerProps}>
             <Button {...primaryButtonProps} />
             {secondaryButtonProps && <Button {...secondaryButtonProps} />}
         </Layout>

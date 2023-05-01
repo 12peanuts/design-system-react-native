@@ -7,10 +7,10 @@ export const LayoutContainer = styled.View<LayoutProps>`
         const padding = ScreenPadding[props.paddingAll || 'None'];
         return css`
             flex-direction: ${props.orientation === 'horizontal' ? 'row' : 'column'};
-            padding-top: ${props.topPadding ? ScreenPadding[props.topPadding] : padding};
-            padding-bottom: ${props.bottomPadding ? ScreenPadding[props.bottomPadding] : padding};
-            padding-left: ${props.leftPadding ? ScreenPadding[props.leftPadding] : padding};
-            padding-right: ${props.rightPadding ? ScreenPadding[props.rightPadding] : padding};
+            padding-top: ${props.paddingTop ? ScreenPadding[props.paddingTop] : padding};
+            padding-bottom: ${props.paddingBottom ? ScreenPadding[props.paddingBottom] : padding};
+            padding-left: ${props.paddingLeft ? ScreenPadding[props.paddingLeft] : padding};
+            padding-right: ${props.paddingRight ? ScreenPadding[props.paddingRight] : padding};
         `;
     }}
 `;

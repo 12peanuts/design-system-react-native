@@ -7,15 +7,15 @@ export interface LayoutProps extends ViewProps {
     orientation?: Orientation;
     spacing?: number;
     paddingAll?: ScreenPaddingType;
-    topPadding?: ScreenPaddingType;
-    bottomPadding?: ScreenPaddingType;
-    leftPadding?: ScreenPaddingType;
-    rightPadding?: ScreenPaddingType;
+    paddingTop?: ScreenPaddingType;
+    paddingBottom?: ScreenPaddingType;
+    paddingLeft?: ScreenPaddingType;
+    paddingRight?: ScreenPaddingType;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
     children,
-    orientation = 'horizontal',
+    orientation = 'vertical',
     spacing = 12,
     ...props
 }) => {

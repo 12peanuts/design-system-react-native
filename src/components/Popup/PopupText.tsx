@@ -24,10 +24,10 @@ export const PopupText: React.FC<PopupTextProps> = ({
     return (
         <Layout
             orientation="vertical"
-            topPadding="Medium"
-            bottomPadding="Large"
-            leftPadding="Large"
-            rightPadding="Large"
+            paddingTop="Medium"
+            paddingBottom="Large"
+            paddingLeft="Large"
+            paddingRight="Large"
             {...containerProps}
         >
             {title && (
