@@ -1,6 +1,6 @@
 {
     "name": "@12peanuts/design-system-react-native",
-    "version": "0.1.1",
+    "version": "0.0.6",
     "description": "test",
     "main": "lib/commonjs/index",
     "module": "lib/module/index",
@@ -34,7 +34,8 @@
         "release": "release-it",
         "example": "yarn --cwd example",
         "bootstrap": "yarn example && yarn install && yarn example pods",
-        "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build"
+        "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build",
+        "publish": "yarn prepack && npm publish"
     },
     "keywords": [
         "react-native",
