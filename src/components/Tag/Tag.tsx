@@ -23,13 +23,14 @@ export const Tag: React.FC<TagProps> = ({
     iconColor,
     textProps,
     contentsSpacing = 8,
-    color,
+    color: passedColor,
     ...props
 }) => {
     const { colors } = useTheme();
     const isIconOnly = iconSrc !== undefined && text === undefined;
     const tintColor = iconColor && colors[iconColor];
     const iconMarginRight = isIconOnly ? 0 : contentsSpacing;
+    const color = passedColor || colors.primary;
 
     return (
         <TagContainer type={type} color={color} {...props}>
@@ -37,7 +38,7 @@ export const Tag: React.FC<TagProps> = ({
                 <Image source={iconSrc} style={{ marginRight: iconMarginRight, tintColor }} />
             )}
             {text && (
-                <Text color={color} {...textProps}>
+                <Text color={color || colors.primary} {...textProps}>
                     {text}
                 </Text>
             )}

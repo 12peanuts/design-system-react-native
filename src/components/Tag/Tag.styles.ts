@@ -14,7 +14,7 @@ export const TagContainer = styled.View<TagProps>`
         switch (type) {
             case 'contained':
                 return css`
-                    background-color: ${color || theme.colors.primary}4d;
+                    background-color: ${color}4d;
                 `;
             case 'outlined':
                 return css`
