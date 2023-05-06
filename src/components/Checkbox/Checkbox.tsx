@@ -30,6 +30,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     disabledCheckBackgroundColor,
     inactiveCheckBackgroundColor,
     disabledTextColor = '#DFDFDF',
+    shape,
 }) => {
     const { colors } = useTheme();
 
@@ -45,25 +46,26 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                 activeCheckBackgroundColor={activeCheckBackgroundColor || colors.primary}
                 disabledCheckBackgroundColor={disabledCheckBackgroundColor || colors.gray300}
                 inactiveCheckBackgroundColor={inactiveCheckBackgroundColor || colors.white}
+                shape={shape}
             />
             <TextArea>
                 {title && (
                     <Text
-                        {...titleTextProps}
                         color={disabled ? disabledTextColor : titleTextProps?.color}
+                        {...titleTextProps}
                     >
                         {title}
                     </Text>
                 )}
                 {description && (
                     <DescriptionText
-                        {...descriptionTextProps}
                         varient={descriptionTextProps?.varient || 'body2'}
                         color={
                             disabled
                                 ? disabledTextColor
                                 : descriptionTextProps?.color || colors.gray350
                         }
+                        {...descriptionTextProps}
                     >
                         {description}
                     </DescriptionText>

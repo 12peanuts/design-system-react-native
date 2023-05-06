@@ -3,13 +3,13 @@ import type { CheckboxProps } from './Checkbox';
 import { Text } from '../Text';
 import { RadiusSize } from '../../shared';
 
-type CheckboxControlContainerProps = Pick<CheckboxProps, 'value'> & {
+type CheckboxControlContainerProps = Pick<CheckboxProps, 'value' | 'shape'> & {
     backgroundColor?: string;
     borderColor?: string;
 };
 
 export const CheckControlContainer = styled.TouchableOpacity<CheckboxControlContainerProps>`
-    border-radius: ${RadiusSize.Circle};
+    border-radius: ${(props) => (props.shape === 'circle' ? RadiusSize.Circle : RadiusSize.Large)};
     justify-content: center;
     align-items: center;
     aspect-ratio: 1 / 1;

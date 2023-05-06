@@ -12,6 +12,7 @@ export type CheckControlProps = {
     inactiveCheckBackgroundColor?: string;
     disabledCheckBackgroundColor?: string;
     checkBorderColor?: string;
+    shape?: 'circle' | 'box';
 } & TouchableOpacityProps;
 
 export const CheckControl: React.FC<CheckControlProps> = ({
@@ -25,6 +26,7 @@ export const CheckControl: React.FC<CheckControlProps> = ({
     inactiveCheckBackgroundColor,
     disabledCheckBackgroundColor,
     checkBorderColor,
+    shape = 'circle',
 }) => {
     const handlePress = () => {
         if (onValueChange) onValueChange(!value);
@@ -44,6 +46,7 @@ export const CheckControl: React.FC<CheckControlProps> = ({
                     : inactiveCheckBackgroundColor
             }
             borderColor={checkBorderColor}
+            shape={shape}
         >
             {value && (
                 <Image
