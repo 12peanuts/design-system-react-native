@@ -4,30 +4,36 @@ import type { TextInputProps } from './TextInput';
 import { Text } from '../Text';
 import { Button } from '../Button';
 
-type TextInputContainerProps = Pick<TextInputProps, 'type' | 'radius'>;
+type TextInputContainerProps = Pick<
+    TextInputProps,
+    'type' | 'radius' | 'multiline' | 'height' | 'backgroundColor'
+>;
 
 export const TextInputContainer = styled.View<TextInputContainerProps>`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    border-radius: ${(props) => RadiusSize[props.radius || 'XLarge']};
+    border-radius: ${(props) => RadiusSize[props.radius || 'Large']};
     padding: 14px 16px;
     margin: 8px 0;
+    height: ${(props) => (props.multiline ? props.height || '150px' : 'auto')};
 
     ${(props) => {
         const { colors } = props.theme;
         switch (props.type) {
             case 'contained':
                 return css`
-                    background-color: ${colors.gray300};
+                    background-color: ${props.backgroundColor || colors.gray150};
                 `;
             case 'outlined':
                 return css`
+                    background-color: ${props.backgroundColor || 'transparent'};
                     border: 1px solid ${colors.gray600};
                 `;
             case 'underlined':
             default:
                 return css`
+                    background-color: ${props.backgroundColor || 'transparent'};
                     border-bottom-width: 0.5px;
                     border-bottom-color: ${colors.gray600};
                     padding: 9px 0;

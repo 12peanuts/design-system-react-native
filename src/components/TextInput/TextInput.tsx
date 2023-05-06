@@ -23,6 +23,8 @@ export interface TextInputProps extends TextInputPropsBase {
     style?: StyleProp<ViewStyle>;
     textProps?: TextProps;
     canClean?: boolean;
+    height?: number;
+    backgroundColor?: string;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
@@ -36,6 +38,9 @@ export const TextInput: React.FC<TextInputProps> = ({
     canClean,
     onChangeText,
     textProps,
+    multiline,
+    height,
+    backgroundColor,
     ...props
 }) => {
     const handleChangeText = (text: string) => {
@@ -56,8 +61,19 @@ export const TextInput: React.FC<TextInputProps> = ({
                     )}
                 </TextInputTitleArea>
             )}
-            <TextInputContainer type={type} radius={radius}>
-                <Input onChangeText={handleChangeText} {...textProps} {...props} />
+            <TextInputContainer
+                type={type}
+                radius={radius}
+                multiline={multiline}
+                height={height}
+                backgroundColor={backgroundColor}
+            >
+                <Input
+                    onChangeText={handleChangeText}
+                    multiline={multiline}
+                    {...textProps}
+                    {...props}
+                />
                 {canClean && (
                     <ClearButton
                         type="ghost"
