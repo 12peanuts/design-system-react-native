@@ -26,14 +26,13 @@ export const Layout: React.FC<LayoutProps> = ({
             const elementsLastIndex = elements.length - 1;
             const contentStyle: ViewStyle = {
                 marginRight:
-                    orientation === 'horizontal' && index < elementsLastIndex ? spacing : undefined,
-                marginBottom:
-                    orientation === 'vertical' && index < elementsLastIndex ? spacing : undefined,
+                    orientation === 'horizontal' && index < elementsLastIndex ? spacing : 0,
+                marginBottom: orientation === 'vertical' && index < elementsLastIndex ? spacing : 0,
             };
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             return cloneElement(reactElement, {
-                ...reactElement.props,
                 style: contentStyle,
+                ...reactElement.props,
             });
         });
     return (
