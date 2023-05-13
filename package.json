@@ -1,6 +1,6 @@
 {
     "name": "@12peanuts/design-system-react-native",
-    "version": "0.0.6",
+    "version": "0.0.8",
     "description": "test",
     "main": "lib/commonjs/index",
     "module": "lib/module/index",
@@ -10,21 +10,7 @@
     "files": [
         "src",
         "lib",
-        "android",
-        "ios",
-        "cpp",
-        "*.podspec",
-        "!lib/typescript/example",
-        "!ios/build",
-        "!android/build",
-        "!android/gradle",
-        "!android/gradlew",
-        "!android/gradlew.bat",
-        "!android/local.properties",
-        "!**/__tests__",
-        "!**/__fixtures__",
-        "!**/__mocks__",
-        "!**/.*"
+        "!**/__tests__"
     ],
     "scripts": {
         "test": "jest",
