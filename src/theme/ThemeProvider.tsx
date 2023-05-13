@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react';
-import { ThemeProvider as ThemeProviderBase } from '@emotion/react';
+import { Theme, ThemeProvider as ThemeProviderBase } from '@emotion/react';
 import { Appearance } from 'react-native';
-import { DefaultTheme, getGlobalTheme } from './theme';
+import { getGlobalTheme } from './theme';
 
 interface ThemeProviderProps {
     children?: ReactNode;
-    theme?: DefaultTheme;
+    theme?: Theme;
 }
 
 export const ThemeProvider = ({ children, theme }: ThemeProviderProps) => {
