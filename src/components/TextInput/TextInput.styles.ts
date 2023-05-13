@@ -12,7 +12,6 @@ type TextInputContainerProps = Pick<
 export const TextInputContainer = styled.View<TextInputContainerProps>`
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     border-radius: ${(props) => RadiusSize[props.radius || 'Large']};
     padding: 14px 16px;
     margin: 8px 0;
@@ -58,6 +57,7 @@ export const Input = styled.TextInput`
     ${typographyStyle};
     flex: 1;
     padding: 0;
+    line-height: 20px;
 `;
 
 export const RequiredText = styled(Text)`
