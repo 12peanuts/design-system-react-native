@@ -2,6 +2,7 @@ import styled, { css } from '@emotion/native';
 import type { CheckboxProps } from './Checkbox';
 import { Text } from '../Text';
 import { Layout } from '../Layout';
+import { RadiusSize } from '../../shared';
 
 type CheckboxControlContainerProps = Pick<CheckboxProps, 'value' | 'radius'> & {
     backgroundColor?: string;
@@ -13,7 +14,7 @@ export const CheckboxContainer = styled(Layout)`
 `;
 
 export const CheckControlContainer = styled.TouchableOpacity<CheckboxControlContainerProps>`
-    border-radius: ${(props) => props.radius};
+    border-radius: ${(props) => RadiusSize[props.radius || 'Medium']};
     justify-content: center;
     align-items: center;
     aspect-ratio: 1 / 1;
