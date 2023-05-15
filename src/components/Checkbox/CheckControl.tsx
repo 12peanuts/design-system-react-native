@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, TouchableOpacityProps } from 'react-native';
 import { CheckControlContainer } from './Checkbox.styles';
+import { RadiusType } from '../../shared';
 import CheckIconSrc from '../../assets/images/ic-20-regular-check.png';
 
 export type CheckControlProps = {
@@ -12,7 +13,7 @@ export type CheckControlProps = {
     inactiveCheckBackgroundColor?: string;
     disabledCheckBackgroundColor?: string;
     checkBorderColor?: string;
-    shape?: 'circle' | 'box';
+    radius?: RadiusType;
 } & TouchableOpacityProps;
 
 export const CheckControl: React.FC<CheckControlProps> = ({
@@ -26,7 +27,7 @@ export const CheckControl: React.FC<CheckControlProps> = ({
     inactiveCheckBackgroundColor,
     disabledCheckBackgroundColor,
     checkBorderColor,
-    shape = 'circle',
+    radius = 'Medium',
 }) => {
     const handlePress = () => {
         if (onValueChange) onValueChange(!value);
@@ -46,7 +47,7 @@ export const CheckControl: React.FC<CheckControlProps> = ({
                     : inactiveCheckBackgroundColor
             }
             borderColor={checkBorderColor}
-            shape={shape}
+            radius={radius}
         >
             {value && (
                 <Image

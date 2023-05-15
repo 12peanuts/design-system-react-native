@@ -1,9 +1,9 @@
 import React from 'react';
 import { useTheme } from '@emotion/react';
-import { Layout } from '../Layout';
 import { Text, TextProps } from '../Text';
-import { DescriptionText, TextArea } from './Checkbox.styles';
+import { CheckboxContainer, DescriptionText, TextArea } from './Checkbox.styles';
 import { CheckControl, CheckControlProps } from './CheckControl';
+import type { RadiusType } from '../../shared';
 
 export interface CheckboxProps extends CheckControlProps {
     title?: string;
@@ -12,6 +12,7 @@ export interface CheckboxProps extends CheckControlProps {
     descriptionTextProps?: TextProps;
     disabled?: boolean;
     disabledTextColor?: string;
+    radius?: RadiusType;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -30,12 +31,12 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     disabledCheckBackgroundColor,
     inactiveCheckBackgroundColor,
     disabledTextColor = '#DFDFDF',
-    shape,
+    radius,
 }) => {
     const { colors } = useTheme();
 
     return (
-        <Layout orientation="horizontal" style={style}>
+        <CheckboxContainer orientation="horizontal" style={style}>
             <CheckControl
                 value={value}
                 onValueChange={onValueChange}
@@ -46,7 +47,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                 activeCheckBackgroundColor={activeCheckBackgroundColor || colors.primary}
                 disabledCheckBackgroundColor={disabledCheckBackgroundColor || colors.gray300}
                 inactiveCheckBackgroundColor={inactiveCheckBackgroundColor || colors.white}
-                shape={shape}
+                radius={radius}
             />
             <TextArea>
                 {title && (
@@ -71,6 +72,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                     </DescriptionText>
                 )}
             </TextArea>
-        </Layout>
+        </CheckboxContainer>
     );
 };
