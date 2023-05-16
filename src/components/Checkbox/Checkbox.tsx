@@ -49,29 +49,32 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                 inactiveCheckBackgroundColor={inactiveCheckBackgroundColor || colors.white}
                 radius={radius}
             />
-            <TextArea>
-                {title && (
-                    <Text
-                        color={disabled ? disabledTextColor : titleTextProps?.color}
-                        {...titleTextProps}
-                    >
-                        {title}
-                    </Text>
-                )}
-                {description && (
-                    <DescriptionText
-                        varient={descriptionTextProps?.varient || 'body2'}
-                        color={
-                            disabled
-                                ? disabledTextColor
-                                : descriptionTextProps?.color || colors.gray350
-                        }
-                        {...descriptionTextProps}
-                    >
-                        {description}
-                    </DescriptionText>
-                )}
-            </TextArea>
+            {title ||
+                (description && (
+                    <TextArea>
+                        {title && (
+                            <Text
+                                color={disabled ? disabledTextColor : titleTextProps?.color}
+                                {...titleTextProps}
+                            >
+                                {title}
+                            </Text>
+                        )}
+                        {description && (
+                            <DescriptionText
+                                varient={descriptionTextProps?.varient || 'body2'}
+                                color={
+                                    disabled
+                                        ? disabledTextColor
+                                        : descriptionTextProps?.color || colors.gray350
+                                }
+                                {...descriptionTextProps}
+                            >
+                                {description}
+                            </DescriptionText>
+                        )}
+                    </TextArea>
+                ))}
         </CheckboxContainer>
     );
 };
