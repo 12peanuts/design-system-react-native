@@ -5,12 +5,13 @@ import { Orientation, ScreenPaddingType } from '../../shared';
 
 export interface DividerProps extends ViewProps {
     orientation?: Orientation;
-    value?: number;
     marginAll?: ScreenPaddingType;
     marginTop?: ScreenPaddingType;
     marginBottom?: ScreenPaddingType;
     marginLeft?: ScreenPaddingType;
     marginRight?: ScreenPaddingType;
+    value?: number;
+    color?: string;
 }
 
 export function Divider(props: DividerProps) {

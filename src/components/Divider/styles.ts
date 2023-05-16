@@ -7,7 +7,7 @@ export const DividerLine = styled.View<DividerProps>`
         const padding = ScreenPadding[props.marginAll || 'None'];
         const value = `${props.value || 1.5}px`;
         return css`
-            background-color: ${props.theme.colors.gray200};
+            background-color: ${props.color || props.theme.colors.gray200};
             width: ${props.orientation === 'horizontal' ? '100%' : value};
             height: ${props.orientation === 'vertical' ? '100%' : value};
             flex-direction: ${props.orientation === 'horizontal' ? 'row' : 'column'};
