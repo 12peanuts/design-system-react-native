@@ -13,6 +13,7 @@ export interface ButtonProps extends TouchableOpacityProps {
     iconColor?: string;
     contentsSpacing?: number;
     iconSrc?: ImageSourcePropType;
+    activeColor?: string;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -23,6 +24,7 @@ export const Button: React.FC<ButtonProps> = ({
     contentsSpacing = 8,
     iconSrc,
     text,
+    activeColor,
     ...props
 }) => {
     const { colors } = useTheme();

@@ -14,15 +14,18 @@ export const ButtonContainer = styled.TouchableOpacity<ButtonContainerProps>`
     padding: ${(props) => (props.isIconOnly ? '12px' : '12px 18px')};
 
     ${(props) => {
-        const { theme, disabled, type } = props;
+        const { theme, disabled, type, activeColor } = props;
         switch (type) {
             case 'contained':
                 return css`
-                    background-color: ${disabled ? theme.colors.inactive : theme.colors.primary};
+                    background-color: ${disabled
+                        ? theme.colors.inactive
+                        : activeColor || theme.colors.primary};
                 `;
             case 'outlined':
                 return css`
-                    border: 1.5px solid ${theme.colors.secondary};
+                    border-width: 1.5px;
+                    border-color: ${activeColor || theme.colors.primary};
                 `;
             case 'ghost':
             default:
