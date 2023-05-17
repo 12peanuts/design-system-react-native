@@ -54,7 +54,7 @@ export function ChipItem({
                             ? colors.white
                             : selected
                             ? activeColor || colors.primary
-                            : inactiveColor || colors.text300
+                            : colors.text100
                     }
                     {...textProps}
                 >
