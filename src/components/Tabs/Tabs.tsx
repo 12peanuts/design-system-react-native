@@ -7,20 +7,22 @@ import React, {
     useState,
 } from 'react';
 import { LayoutChangeEvent, ScrollView, View } from 'react-native';
-import { Layout } from '@12peanuts/design-system-react-native';
 import { TabsMenu } from './TabsMenu';
+import { TabsContainer } from './Tabs.styles';
 import { TabsContextState, TabsProvider } from './TabsProvider';
 
 export interface TabsProps extends PropsWithChildren<unknown> {
     tabMenuNames?: string[];
     tabMenuType?: TabsContextState['tabMenuType'];
     tabMenuDisplay?: TabsContextState['tabMenuDisplay'];
+    activeColor?: string;
 }
 
 export function Tabs({
     tabMenuType = 'underline',
     tabMenuDisplay = 'inline',
     tabMenuNames = [],
+    activeColor = 'black',
     children: passedChildren,
 }: TabsProps) {
     const [width, setWidth] = useState(0);
@@ -33,7 +35,7 @@ export function Tabs({
                 overwrittenNames[index] = title;
                 const reactElement = element as ReactElement;
                 return (
-                    <View key={title} style={{ width, aspectRatio: 1 / 1 }}>
+                    <View key={title} style={{ width }}>
                         {reactElement}
                     </View>
                 );
@@ -47,13 +49,17 @@ export function Tabs({
     };
 
     return (
-        <TabsProvider tabMenuType={tabMenuType} tabMenuDisplay={tabMenuDisplay}>
-            <Layout onLayout={handleLayout}>
+        <TabsProvider
+            tabMenuType={tabMenuType}
+            tabMenuDisplay={tabMenuDisplay}
+            activeColor={activeColor}
+        >
+            <TabsContainer onLayout={handleLayout}>
                 <TabsMenu data={menuNames} />
                 <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
                     {children}
                 </ScrollView>
-            </Layout>
+            </TabsContainer>
         </TabsProvider>
     );
 }

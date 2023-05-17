@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FlatList, ListRenderItemInfo } from 'react-native';
-import { Layout } from '@12peanuts/design-system-react-native';
 import { TabItem } from './TabItem';
 import { useTabsContext } from './TabsProvider';
+import { TabsMenuContainer } from './TabsMenu.styles';
 
 export interface TabsProps {
     data: string[];
@@ -27,24 +27,26 @@ export function TabsMenu({ data, spacing: passedSpacing }: TabsProps) {
         );
     };
 
-    return tabMenuDisplay === 'flex' ? (
-        <Layout orientation="horizontal" spacing={spacing}>
-            {data.map((title, index) => (
-                <TabItem
-                    title={title}
-                    key={title}
-                    isActive={index === selectedIdx}
-                    onPress={() => setSelectedIdx(index)}
+    return (
+        <TabsMenuContainer>
+            {tabMenuDisplay === 'inline' ? (
+                <FlatList
+                    horizontal
+                    bounces={false}
+                    showsHorizontalScrollIndicator={false}
+                    data={data}
+                    renderItem={renderItem}
                 />
-            ))}
-        </Layout>
-    ) : (
-        <FlatList
-            horizontal
-            bounces={false}
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            renderItem={renderItem}
-        />
+            ) : (
+                data.map((title, index) => (
+                    <TabItem
+                        title={title}
+                        key={title}
+                        isActive={index === selectedIdx}
+                        onPress={() => setSelectedIdx(index)}
+                    />
+                ))
+            )}
+        </TabsMenuContainer>
     );
 }
