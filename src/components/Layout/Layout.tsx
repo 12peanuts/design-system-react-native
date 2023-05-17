@@ -28,11 +28,13 @@ export const Layout: React.FC<LayoutProps> = ({
                 marginRight:
                     orientation === 'horizontal' && index < elementsLastIndex ? spacing : 0,
                 marginBottom: orientation === 'vertical' && index < elementsLastIndex ? spacing : 0,
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+                ...reactElement.props.style,
             };
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             return cloneElement(reactElement, {
-                style: contentStyle,
                 ...reactElement.props,
+                style: contentStyle,
             });
         });
     return (
