@@ -5,50 +5,56 @@ import { Text, TextProps } from '@12peanuts/design-system-react-native';
 import { ChipItemContainer, WrappedImage } from './ChipItem.styles';
 import { ComponentType, RadiusType } from '../../shared';
 
-export interface ChipItemProps extends TouchableOpacityProps {
+export interface ChipDataBase {
     text?: string;
-    radius?: RadiusType;
     iconSrc?: ImageSourcePropType;
+}
+
+export interface ChipItemStyleProps extends TouchableOpacityProps {
+    type?: ComponentType;
+    radius?: RadiusType;
     textProps?: TextProps;
     spacing?: number;
     selected?: boolean;
-    type?: ComponentType;
-    selectedColor?: string;
-    unselectedColor?: string;
+    activeColor?: string;
+    inactiveColor?: string;
 }
 
 export function ChipItem({
-    type,
     text,
-    textProps,
     iconSrc,
+    type = 'contained',
+    radius,
+    textProps,
     spacing = 8,
-    activeOpacity = 0.7,
     selected = false,
-    selectedColor,
-    unselectedColor,
+    activeOpacity = 0.7,
+    activeColor,
+    inactiveColor,
     ...props
-}: ChipItemProps) {
+}: ChipDataBase & ChipItemStyleProps) {
     const { colors } = useTheme();
+    const iconMarginRight = text ? spacing : 0;
 
     return (
         <ChipItemContainer
             type={type}
+            radius={radius}
             selected={selected}
             activeOpacity={activeOpacity}
-            selectedColor={selectedColor}
-            unselectedColor={unselectedColor}
+            activeColor={activeColor}
+            inactiveColor={inactiveColor}
             {...props}
         >
-            {iconSrc && <WrappedImage source={iconSrc} style={{ marginRight: spacing }} />}
+            {iconSrc && <WrappedImage source={iconSrc} style={{ marginRight: iconMarginRight }} />}
             {text && (
                 <Text
                     color={
                         type === 'contained'
                             ? colors.white
                             : selected
-                            ? selectedColor || colors.primary
-                            : unselectedColor || colors.text300
+                            ? activeColor || colors.primary
+                            : inactiveColor || colors.text300
                     }
                     {...textProps}
                 >

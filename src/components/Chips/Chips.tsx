@@ -1,19 +1,21 @@
 import React from 'react';
-import { FlatList, FlatListProps, ListRenderItemInfo } from 'react-native';
-import { Layout } from '@12peanuts/design-system-react-native';
-import { ChipItem, ChipItemProps } from './ChipItem';
+import { FlatList, FlatListProps, ListRenderItemInfo, StyleProp, ViewStyle } from 'react-native';
+import { ChipItem, ChipDataBase, ChipItemStyleProps } from './ChipItem';
 import { ChipsProvider, useChipsContext } from './ChipsProvider';
+import { ChipsContainer } from './Chips.styles';
 
 export interface ChipsProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
     spacing?: number;
     onSelectionChanged?: (item: T) => void;
-    type?: ChipItemProps['type'];
+    containerStyle?: StyleProp<ViewStyle>;
+    chipItemStyle?: ChipItemStyleProps;
 }
 
-function Chips<T extends ChipItemProps>({
-    type,
+function Chips<T extends ChipDataBase>({
     data,
     spacing = 8,
+    chipItemStyle,
+    containerStyle,
     onSelectionChanged,
     ...props
 }: ChipsProps<T>) {
@@ -28,18 +30,19 @@ function Chips<T extends ChipItemProps>({
 
         return (
             <ChipItem
-                type={type}
+                text={item.text}
+                iconSrc={item.iconSrc}
                 key={index}
                 selected={selectedIdx === index}
                 onPress={handlePress}
                 style={{ marginLeft }}
-                {...item}
+                {...chipItemStyle}
             />
         );
     };
 
     return (
-        <Layout paddingTop="Medium" paddingBottom="Medium">
+        <ChipsContainer style={containerStyle}>
             <FlatList
                 horizontal
                 bounces={false}
@@ -48,11 +51,11 @@ function Chips<T extends ChipItemProps>({
                 renderItem={renderItem}
                 {...props}
             />
-        </Layout>
+        </ChipsContainer>
     );
 }
 
-function WrappedChips<T extends ChipItemProps>(props: ChipsProps<T>) {
+function WrappedChips<T extends ChipDataBase>(props: ChipsProps<T>) {
     return (
         <ChipsProvider>
             <Chips {...props} />
