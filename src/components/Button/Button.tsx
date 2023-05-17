@@ -11,9 +11,11 @@ export interface ButtonProps extends TouchableOpacityProps {
     text?: string;
     textProps?: TextProps;
     iconColor?: string;
-    contentsSpacing?: number;
     iconSrc?: ImageSourcePropType;
-    activeColor?: string;
+    color?: string;
+    disabledColor?: string;
+    reverse?: boolean;
+    spacing?: number;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -21,21 +23,24 @@ export const Button: React.FC<ButtonProps> = ({
     type = 'contained',
     textProps,
     iconColor,
-    contentsSpacing = 8,
     iconSrc,
     text,
-    activeColor,
+    spacing = 8,
+    reverse,
     ...props
 }) => {
     const { colors } = useTheme();
-    const isIconOnly = iconSrc !== undefined && text === undefined;
-    const iconMarginRight = isIconOnly ? 0 : contentsSpacing;
+    const isIconOnly = text === undefined;
+    const iconMarginRight = isIconOnly ? 0 : reverse ? 0 : spacing;
+    const textMarginRight = isIconOnly ? 0 : reverse ? spacing : 0;
 
     return (
         <ButtonContainer
-            activeOpacity={activeOpacity}
             type={type}
+            activeOpacity={activeOpacity}
             isIconOnly={isIconOnly}
+            spacing={spacing}
+            reverse={reverse}
             {...props}
         >
             {iconSrc && (
@@ -45,7 +50,13 @@ export const Button: React.FC<ButtonProps> = ({
                 />
             )}
             {text && (
-                <Text varient="subtitle2" color={colors.text100} isBold {...textProps}>
+                <Text
+                    varient="subtitle2"
+                    isBold
+                    color={colors.text100}
+                    style={{ marginRight: textMarginRight }}
+                    {...textProps}
+                >
                     {text}
                 </Text>
             )}

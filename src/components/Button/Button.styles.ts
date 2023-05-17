@@ -7,25 +7,27 @@ type ButtonContainerProps = ButtonProps & {
 };
 
 export const ButtonContainer = styled.TouchableOpacity<ButtonContainerProps>`
-    flex-direction: row;
+    flex-direction: ${(props) => (props.reverse ? 'row-reverse' : 'row')};
     align-items: center;
-    justify-content: center;
     border-radius: ${(props) => RadiusSize[props.radius || 'XLarge']};
-    padding: ${(props) => (props.isIconOnly ? '12px' : '12px 18px')};
+    padding: ${(props) => (props.isIconOnly ? `12px` : `12px 18px`)};
 
     ${(props) => {
-        const { theme, disabled, type, activeColor } = props;
+        const { theme, disabled, type, color, disabledColor } = props;
         switch (type) {
             case 'contained':
                 return css`
                     background-color: ${disabled
-                        ? theme.colors.inactive
-                        : activeColor || theme.colors.primary};
+                        ? disabledColor || theme.colors.inactive
+                        : color || theme.colors.primary};
                 `;
             case 'outlined':
                 return css`
-                    border-width: 1.5px;
-                    border-color: ${activeColor || theme.colors.primary};
+                    border-width: ${disabled ? '0px' : '1.5px'};
+                    border-color: ${color || theme.colors.primary};
+                    background-color: ${disabled
+                        ? disabledColor || theme.colors.inactive
+                        : undefined};
                 `;
             case 'ghost':
             default:
