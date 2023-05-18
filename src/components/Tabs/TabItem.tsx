@@ -3,6 +3,7 @@ import { TouchableOpacityProps } from 'react-native';
 import { ActiveBar, TabItemContainer } from './TabItem.styles';
 import { useTabMenuContext, useTabsContext } from './TabsProvider';
 import { Text } from '../Text';
+import { useTheme } from '@emotion/react';
 
 export interface TabItemProps extends TouchableOpacityProps {
     isActive: boolean;
@@ -10,6 +11,7 @@ export interface TabItemProps extends TouchableOpacityProps {
 }
 
 export function TabItem({ title, isActive, activeOpacity = 0.8, ...props }: TabItemProps) {
+    const { colors } = useTheme();
     const { tabMenuType, activeColor, activeBarHeight } = useTabsContext();
     const { tabMenuColor, tabMenuHorizontalPadding, tabMenuVerticalPadding, tabMenuTextProps } =
         useTabMenuContext();
@@ -25,7 +27,11 @@ export function TabItem({ title, isActive, activeOpacity = 0.8, ...props }: TabI
             tabMenuVerticalPadding={tabMenuVerticalPadding}
             {...props}
         >
-            <Text varient="body1" {...tabMenuTextProps}>
+            <Text
+                varient="h3"
+                color={isActive ? activeColor : colors.gray500}
+                {...tabMenuTextProps}
+            >
                 {title}
             </Text>
             <ActiveBar
