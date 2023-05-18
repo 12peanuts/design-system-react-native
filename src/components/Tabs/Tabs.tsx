@@ -1,17 +1,10 @@
-import React, {
-    Children,
-    PropsWithChildren,
-    ReactElement,
-    isValidElement,
-    useMemo,
-    useState,
-} from 'react';
-import { LayoutChangeEvent, ScrollView, View } from 'react-native';
+import React, { Children, ReactElement, isValidElement, useMemo, useState } from 'react';
+import { LayoutChangeEvent, ScrollView, ScrollViewProps, View } from 'react-native';
 import { TabsMenu } from './TabsMenu';
 import { TabsContainer } from './Tabs.styles';
 import { TabMenuContextState, TabsContextState, TabsProvider } from './TabsProvider';
 
-export interface TabsProps extends PropsWithChildren<unknown> {
+export interface TabsProps extends ScrollViewProps {
     tabMenuNames?: string[];
     tabMenuType?: TabsContextState['tabMenuType'];
     tabMenuDisplay?: TabsContextState['tabMenuDisplay'];
@@ -32,8 +25,9 @@ export function Tabs({
     children: passedChildren,
     tabMenuTextProps = { varient: 'h4' },
     tabMenuColor = '#fff',
-    tabMenuVerticalPadding = 'Small',
-    tabMenuHorizontalPadding = 'Small',
+    tabMenuVerticalPadding = 'Medium',
+    tabMenuHorizontalPadding = 'Medium',
+    ...props
 }: TabsProps) {
     const [width, setWidth] = useState(0);
     const { children, menuNames } = useMemo(() => {
@@ -71,7 +65,13 @@ export function Tabs({
         >
             <TabsContainer onLayout={handleLayout}>
                 <TabsMenu data={menuNames} />
-                <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
+                <ScrollView
+                    horizontal
+                    pagingEnabled
+                    bounces={false}
+                    showsHorizontalScrollIndicator={false}
+                    {...props}
+                >
                     {children}
                 </ScrollView>
             </TabsContainer>
