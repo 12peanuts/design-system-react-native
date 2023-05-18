@@ -9,6 +9,7 @@ type ButtonContainerProps = ButtonProps & {
 export const ButtonContainer = styled.TouchableOpacity<ButtonContainerProps>`
     flex-direction: ${(props) => (props.reverse ? 'row-reverse' : 'row')};
     align-items: center;
+    justify-content: center;
     border-radius: ${(props) => RadiusSize[props.radius || 'XLarge']};
     padding: ${(props) => (props.isIconOnly ? `12px` : `12px 18px`)};
 

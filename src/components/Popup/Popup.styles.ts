@@ -1,7 +1,5 @@
 import styled, { css } from '@emotion/native';
-import type { ImageStyle } from 'react-native';
 import type { PopupProps } from './Popup';
-import type { PopupImageProps } from './PopupImage';
 import { RadiusSize } from '../../shared';
 import { Button } from '../Button';
 import { Text } from '../Text';
@@ -29,25 +27,11 @@ export const PopupButtonArea = styled.View`
     padding: 20px;
 `;
 
-export const StyledPopupImage = styled.Image<PopupImageProps>`
-    width: 100%;
-
-    ${(props) => {
-        const radius = RadiusSize[props.radius || 'Large'];
-        return css<ImageStyle>`
-            border-top-left-radius: ${props.borderTopLeftRadius || radius};
-            border-top-right-radius: ${props.borderTopRightRadius || radius};
-            border-bottom-left-radius: ${props.borderBottomLeftRadius || radius};
-            border-bottom-right-radius: ${props.borderBottomLeftRadius || radius};
-        `;
-    }};
-`;
-
 export const PopupCloseButton = styled(Button)`
     position: absolute;
+    z-index: 1;
     right: 0;
     top: 0;
-    z-index: 1;
 `;
 
 export const WrappedPopupText = styled(Text)`
