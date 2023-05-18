@@ -9,13 +9,18 @@ import React, {
 import { LayoutChangeEvent, ScrollView, View } from 'react-native';
 import { TabsMenu } from './TabsMenu';
 import { TabsContainer } from './Tabs.styles';
-import { TabsContextState, TabsProvider } from './TabsProvider';
+import { TabMenuContextState, TabsContextState, TabsProvider } from './TabsProvider';
 
 export interface TabsProps extends PropsWithChildren<unknown> {
     tabMenuNames?: string[];
     tabMenuType?: TabsContextState['tabMenuType'];
     tabMenuDisplay?: TabsContextState['tabMenuDisplay'];
-    activeColor?: string;
+    activeColor?: TabsContextState['activeColor'];
+    activeBarHeight?: TabsContextState['activeBarHeight'];
+    tabMenuTextProps?: TabMenuContextState['tabMenuTextProps'];
+    tabMenuColor?: TabMenuContextState['tabMenuColor'];
+    tabMenuVerticalPadding?: TabMenuContextState['tabMenuVerticalPadding'];
+    tabMenuHorizontalPadding?: TabMenuContextState['tabMenuHorizontalPadding'];
 }
 
 export function Tabs({
@@ -23,7 +28,12 @@ export function Tabs({
     tabMenuDisplay = 'inline',
     tabMenuNames = [],
     activeColor = 'black',
+    activeBarHeight = 1.5,
     children: passedChildren,
+    tabMenuTextProps = { varient: 'h4' },
+    tabMenuColor = '#fff',
+    tabMenuVerticalPadding = 'Small',
+    tabMenuHorizontalPadding = 'Small',
 }: TabsProps) {
     const [width, setWidth] = useState(0);
     const { children, menuNames } = useMemo(() => {
@@ -53,6 +63,11 @@ export function Tabs({
             tabMenuType={tabMenuType}
             tabMenuDisplay={tabMenuDisplay}
             activeColor={activeColor}
+            activeBarHeight={activeBarHeight}
+            tabMenuTextProps={tabMenuTextProps}
+            tabMenuVerticalPadding={tabMenuVerticalPadding}
+            tabMenuHorizontalPadding={tabMenuHorizontalPadding}
+            tabMenuColor={tabMenuColor}
         >
             <TabsContainer onLayout={handleLayout}>
                 <TabsMenu data={menuNames} />

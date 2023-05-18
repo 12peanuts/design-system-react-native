@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, TouchableOpacityProps } from 'react-native';
+import { TouchableOpacityProps } from 'react-native';
 import { ActiveBar, TabItemContainer } from './TabItem.styles';
-import { useTabsContext } from './TabsProvider';
+import { useTabMenuContext, useTabsContext } from './TabsProvider';
+import { Text } from '../Text';
 
 export interface TabItemProps extends TouchableOpacityProps {
     isActive: boolean;
@@ -9,7 +10,9 @@ export interface TabItemProps extends TouchableOpacityProps {
 }
 
 export function TabItem({ title, isActive, activeOpacity = 0.8, ...props }: TabItemProps) {
-    const { tabMenuType, activeColor } = useTabsContext();
+    const { tabMenuType, activeColor, activeBarHeight } = useTabsContext();
+    const { tabMenuColor, tabMenuHorizontalPadding, tabMenuVerticalPadding, tabMenuTextProps } =
+        useTabMenuContext();
 
     return (
         <TabItemContainer
@@ -17,10 +20,20 @@ export function TabItem({ title, isActive, activeOpacity = 0.8, ...props }: TabI
             tabMenuType={tabMenuType}
             activeOpacity={activeOpacity}
             activeColor={activeColor}
+            tabMenuColor={tabMenuColor}
+            tabMenuHorizontalPadding={tabMenuHorizontalPadding}
+            tabMenuVerticalPadding={tabMenuVerticalPadding}
             {...props}
         >
-            <Text>{title}</Text>
-            <ActiveBar isActive={isActive} tabMenuType={tabMenuType} activeColor={activeColor} />
+            <Text varient="body1" {...tabMenuTextProps}>
+                {title}
+            </Text>
+            <ActiveBar
+                isActive={isActive}
+                tabMenuType={tabMenuType}
+                activeColor={activeColor}
+                activeBarHeight={activeBarHeight}
+            />
         </TabItemContainer>
     );
 }
