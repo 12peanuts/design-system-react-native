@@ -1,24 +1,23 @@
 import React from 'react';
+import { ButtonProps } from '../Button';
 import { Layout, LayoutProps } from '../Layout';
-import { Button, ButtonProps } from '../Button';
-import type { StyleProp, ViewStyle } from 'react-native';
+import { WrappedButton } from './PopupButton.styles';
 
-export interface PopupButtonProps {
-    style?: StyleProp<ViewStyle>;
+export interface PopupButtonProps extends LayoutProps {
     primaryButtonProps: ButtonProps;
     secondaryButtonProps?: ButtonProps;
-    containerProps?: LayoutProps;
 }
 
 export const PopupButton: React.FC<PopupButtonProps> = ({
     primaryButtonProps,
     secondaryButtonProps,
-    containerProps,
+    paddingAll = 'Large',
+    ...props
 }) => {
     return (
-        <Layout orientation="vertical" paddingAll="Large" {...containerProps}>
-            <Button {...primaryButtonProps} />
-            {secondaryButtonProps && <Button {...secondaryButtonProps} />}
+        <Layout paddingAll={paddingAll} {...props}>
+            <WrappedButton {...primaryButtonProps} />
+            {secondaryButtonProps && <WrappedButton {...secondaryButtonProps} />}
         </Layout>
     );
 };
