@@ -14,24 +14,28 @@ yarn add @12peanuts/design-system-react-native
 ```
 
 ## Usage
-After installation, wrap your entry point with `<ThemeProvider>` like below.
+After installation, wrap your entry point with `<ThemeProvider>` that supports predefined theme.
+```ts
+import React from 'react';
+import { ThemeProvider } from '@12peanuts/design-system-react-native';
 
-```js
-import { DesignSystemReactNativeView } from "@12peanuts/design-system-react-native";
-
-// ...
-
-<DesignSystemReactNativeView color="tomato" />
+export default function App() {
+    return (
+        <ThemeProvider>
+            <RootView />
+        </ThemeProvider>
+    );
+}
 ```
 
-## Contributing
+## Tutorials
+- [Button Example](./docs/button.md)
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
+## Contribution
+This project is an open source project with MIT license - you can browse source code and use components in your applications without any limitations. Although th project is open source, we do not accept any contributions to this project.
 ## License
 
 MIT
 
 ---
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
