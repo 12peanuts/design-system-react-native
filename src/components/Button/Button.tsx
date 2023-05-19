@@ -1,9 +1,9 @@
 import React from 'react';
-import { Image, ImageSourcePropType, TouchableOpacityProps } from 'react-native';
-import type { ComponentType, RadiusType } from '../../shared';
-import { Text, TextProps } from '../Text';
-import { ButtonContainer } from './Button.styles';
 import { useTheme } from '@emotion/react';
+import { ImageSourcePropType, TouchableOpacityProps } from 'react-native';
+import { ButtonContainer, StyledImage, WrappedText } from './Button.styles';
+import { ComponentType, RadiusType } from '../../shared';
+import { TextProps } from '../Text';
 
 export interface ButtonProps extends TouchableOpacityProps {
     type?: ComponentType;
@@ -21,7 +21,11 @@ export interface ButtonProps extends TouchableOpacityProps {
 export const Button: React.FC<ButtonProps> = ({
     activeOpacity = 0.7,
     type = 'contained',
-    textProps,
+    radius = 'Large',
+    textProps = {
+        varient: 'subtitle1',
+        isBold: true,
+    },
     iconColor,
     iconSrc,
     text,
@@ -36,29 +40,27 @@ export const Button: React.FC<ButtonProps> = ({
 
     return (
         <ButtonContainer
-            type={type}
             activeOpacity={activeOpacity}
+            type={type}
+            radius={radius}
             isIconOnly={isIconOnly}
             spacing={spacing}
             reverse={reverse}
             {...props}
         >
             {iconSrc && (
-                <Image
-                    source={iconSrc}
-                    style={{ marginRight: iconMarginRight, tintColor: iconColor }}
-                />
+                <StyledImage source={iconSrc} marginRight={iconMarginRight} color={iconColor} />
             )}
             {text && (
-                <Text
+                <WrappedText
                     varient="subtitle2"
                     isBold
                     color={colors.text100}
-                    style={{ marginRight: textMarginRight }}
+                    marginRight={textMarginRight}
                     {...textProps}
                 >
                     {text}
-                </Text>
+                </WrappedText>
             )}
         </ButtonContainer>
     );

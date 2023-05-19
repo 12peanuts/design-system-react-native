@@ -1,40 +1,73 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Layout, Text, Button } from '@12peanuts/design-system-react-native';
+import { Layout, Button } from '@12peanuts/design-system-react-native';
 
 export default {
-  title: 'Component/Button',
-  component: () => {
-    return (
-      <Layout orientation="horizontal" spacing={12}>
-        <Button text="hello" type="contained" />
-        <Button text="hello" type="outlined" />
-        <Button text="hello" type="ghost" />
-      </Layout>
-    );
-  },
+    title: 'Component/Button',
+    component: Button,
+};
+
+export const Default = {
+    args: {
+        activeOpacity: 0.7,
+        type: 'contained',
+        radius: 'Large',
+        textProps: {
+            varient: 'subtitle1',
+            isBold: true,
+        },
+        iconColor: 'white',
+        iconSrc: undefined,
+        text: 'Button',
+        spacing: 8,
+        reverse: false,
+    },
+};
+
+export const TextButton = {
+    render: () => {
+        return (
+            <Layout orientation="vertical" spacing={20}>
+                <Button text="Button" type="contained" />
+                <Button text="Button" type="outlined" />
+                <Button text="Button" type="ghost" />
+            </Layout>
+        );
+    },
 };
 
 export const IconButton = {
-  render: () => {
-    return (
-      <Layout orientation="vertical" spacing={50}>
-        <Button text="hello" type="contained" />
-        <Button text="hello" type="outlined" />
-        <Button text="hello" type="ghost" />
-      </Layout>
-    );
-  },
+    render: () => {
+        return (
+            <Layout orientation="horizontal" spacing={20}>
+                <Button iconSrc={{ uri: 'https://picsum.photos/200/300' }} type="contained" />
+                <Button iconSrc={{ uri: 'https://picsum.photos/200/300' }} type="outlined" />
+                <Button iconSrc={{ uri: 'https://picsum.photos/200/300' }} type="ghost" />
+            </Layout>
+        );
+    },
 };
 
 export const IconTextButton = {
-  render: () => {
-    return (
-      <Layout orientation="horizontal" spacing={22}>
-        <Button text="hello" type="contained" />
-        <Button text="hello" type="outlined" />
-        <Button text="hello" type="ghost" />
-      </Layout>
-    );
-  },
+    render: () => {
+        return (
+            <Layout orientation="vertical" spacing={20}>
+                <Button
+                    text="Button"
+                    iconSrc={{ uri: 'https://picsum.photos/200/300' }}
+                    type="contained"
+                />
+                <Button
+                    text="Button"
+                    iconSrc={{ uri: 'https://picsum.photos/200/300' }}
+                    type="outlined"
+                />
+                <Button
+                    text="Button"
+                    iconSrc={{ uri: 'https://picsum.photos/200/300' }}
+                    type="ghost"
+                    reverse
+                />
+            </Layout>
+        );
+    },
 };

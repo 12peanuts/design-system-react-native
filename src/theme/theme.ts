@@ -90,11 +90,11 @@ const defaultColors: {
     dark: DefaultTheme['colors'];
 } = {
     light: {
-        primary: '#004581',
-        secondary: '#018ABD',
-        tertiary: '#97CBDC',
+        primary: '#FF9201',
+        secondary: '#FFAB41',
+        tertiary: '#FFD181',
         inactive: '#EFEFEF',
-        background: '#DDE8F0',
+        background: '#EBEDEE',
         text100: '#FCFCFC',
         text200: '#949494',
         text300: '#555555',
