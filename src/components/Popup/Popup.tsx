@@ -1,5 +1,5 @@
 import React from 'react';
-import { GestureResponderEvent, Modal } from 'react-native';
+import { GestureResponderEvent, Modal, ModalProps } from 'react-native';
 import { PopupBackground, PopupCloseButton, PopupContainer } from './Popup.styles';
 import { PopupImage } from './PopupImage';
 import { PopupText } from './PopupText';
@@ -8,7 +8,7 @@ import type { RadiusType } from '../../shared';
 import type { ButtonProps } from '../Button';
 import CloseIcon from '../../assets/images/ic-20-regular-close.png';
 
-export interface PopupProps {
+export interface PopupProps extends ModalProps {
     radius?: RadiusType;
     hasCloseButton?: boolean;
     closeButtonProps?: ButtonProps;
@@ -23,6 +23,7 @@ const PopupMain: React.FC<PopupProps> = ({
     hasCloseButton = false,
     closeButtonProps,
     children,
+    ...props
 }) => {
     const closePopup = (event: GestureResponderEvent) => {
         if (closeButtonProps?.onPress) closeButtonProps.onPress(event);
@@ -34,7 +35,7 @@ const PopupMain: React.FC<PopupProps> = ({
     };
 
     return (
-        <Modal visible={visible}>
+        <Modal visible={visible} {...props}>
             <PopupBackground onPress={handlePressBackground}>
                 <PopupContainer radius={radius}>
                     {hasCloseButton && (
