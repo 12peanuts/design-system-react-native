@@ -1,3 +1,4 @@
+import { Theme } from '@emotion/react';
 import type { ColorSchemeName } from 'react-native';
 
 export interface DefaultTheme {
@@ -139,10 +140,16 @@ const defaultColors: {
     },
 };
 
-export function getGlobalTheme(systemTheme: ColorSchemeName): DefaultTheme {
+export function getGlobalTheme(
+    systemTheme: ColorSchemeName,
+    additionalProps?: Partial<Theme>,
+): DefaultTheme {
     const colors = defaultColors[systemTheme ?? 'dark'];
     return {
-        colors,
+        colors: {
+            ...colors,
+            ...additionalProps?.colors,
+        },
         typography: {
             h1: {
                 fontSize: '64px',
@@ -188,6 +195,7 @@ export function getGlobalTheme(systemTheme: ColorSchemeName): DefaultTheme {
                 fontSize: '12px',
                 fontWeight: 400,
             },
+            ...additionalProps?.typography,
         },
         fontFamily: {
             en: {
@@ -200,6 +208,8 @@ export function getGlobalTheme(systemTheme: ColorSchemeName): DefaultTheme {
                 medium: '',
                 bold: '',
             },
+            ...additionalProps?.fontFamily,
         },
+        ...additionalProps,
     };
 }
