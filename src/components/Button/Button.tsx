@@ -21,7 +21,7 @@ export interface ButtonProps extends TouchableOpacityProps {
 export const Button: React.FC<ButtonProps> = ({
     activeOpacity = 0.7,
     type = 'contained',
-    radius = 'Large',
+    radius = 'XLarge',
     textProps = {
         varient: 'subtitle1',
         isBold: true,
@@ -55,7 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
                 <WrappedText
                     varient="subtitle2"
                     isBold
-                    color={colors.text100}
+                    color={type === 'ghost' ? colors.primary : colors.text100}
                     marginRight={textMarginRight}
                     {...textProps}
                 >
