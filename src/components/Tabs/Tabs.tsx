@@ -1,5 +1,12 @@
 import React, { Children, ReactElement, isValidElement, useMemo, useState } from 'react';
-import { LayoutChangeEvent, ScrollView, ScrollViewProps, View } from 'react-native';
+import {
+    LayoutChangeEvent,
+    ScrollView,
+    ScrollViewProps,
+    View,
+    ViewStyle,
+    StyleProp,
+} from 'react-native';
 import { TabsMenu } from './TabsMenu';
 import { TabsContainer } from './Tabs.styles';
 import { TabMenuContextState, TabsContextState, TabsProvider } from './TabsProvider';
@@ -14,6 +21,7 @@ export interface TabsProps extends ScrollViewProps {
     tabMenuColor?: TabMenuContextState['tabMenuColor'];
     tabMenuVerticalPadding?: TabMenuContextState['tabMenuVerticalPadding'];
     tabMenuHorizontalPadding?: TabMenuContextState['tabMenuHorizontalPadding'];
+    containerStyle?: StyleProp<ViewStyle>;
 }
 
 export function Tabs({
@@ -27,6 +35,7 @@ export function Tabs({
     tabMenuColor = '#fff',
     tabMenuVerticalPadding = 'Medium',
     tabMenuHorizontalPadding = 'Medium',
+    containerStyle,
     ...props
 }: TabsProps) {
     const [width, setWidth] = useState(0);
@@ -63,7 +72,7 @@ export function Tabs({
             tabMenuHorizontalPadding={tabMenuHorizontalPadding}
             tabMenuColor={tabMenuColor}
         >
-            <TabsContainer onLayout={handleLayout}>
+            <TabsContainer onLayout={handleLayout} style={containerStyle}>
                 <TabsMenu data={menuNames} />
                 <ScrollView
                     horizontal
