@@ -12,8 +12,6 @@
     "sb:server": "react-native-storybook-server"
   },
   "dependencies": {
-    "@emotion/native": "^11.10.6",
-    "@emotion/react": "^11.10.6",
     "react": "18.2.0",
     "react-native": "0.71.5"
   },

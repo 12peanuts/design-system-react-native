@@ -1,31 +1,41 @@
 # @12peanuts/design-system-react-native
 
-design system for react-native
+A set of UI components for ReactNative.
+If you are looking for UI kit, try this in your project.
 
 ## Installation
-
+### Using npm:
 ```sh
 npm install @12peanuts/design-system-react-native
 ```
-
-## Usage
-
-```js
-import { DesignSystemReactNativeView } from "@12peanuts/design-system-react-native";
-
-// ...
-
-<DesignSystemReactNativeView color="tomato" />
+### Using yarn:
+```sh
+yarn add @12peanuts/design-system-react-native
 ```
 
-## Contributing
+## Usage
+After installation, wrap your entry point with `<ThemeProvider>` that supports predefined theme.
+```ts
+import React from 'react';
+import { ThemeProvider } from '@12peanuts/design-system-react-native';
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+export default function App() {
+    return (
+        <ThemeProvider>
+            <RootView />
+        </ThemeProvider>
+    );
+}
+```
 
+## Tutorials
+- [Button Example](./docs/button.md)
+
+
+## Contribution
+This project is an open source project with MIT license - you can browse source code and use components in your applications without any limitations. Although th project is open source, we do not accept any contributions to this project.
 ## License
 
 MIT
 
 ---
-
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
