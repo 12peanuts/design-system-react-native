@@ -11,6 +11,7 @@ export interface LayoutProps extends ViewProps {
     paddingBottom?: ScreenPaddingType;
     paddingLeft?: ScreenPaddingType;
     paddingRight?: ScreenPaddingType;
+    flex?: number;
 }
 
 export const Layout: React.FC<LayoutProps> = ({
