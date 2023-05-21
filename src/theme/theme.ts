@@ -140,63 +140,61 @@ const defaultColors: {
     },
 };
 
+const defaultTypography: DefaultTheme['typography'] = {
+    h1: {
+        fontSize: '64px',
+        fontWeight: 700,
+    },
+    h2: {
+        fontSize: '48px',
+        fontWeight: 700,
+    },
+    h3: {
+        fontSize: '32px',
+        fontWeight: 700,
+    },
+    h4: {
+        fontSize: '24px',
+        fontWeight: 700,
+    },
+    h5: {
+        fontSize: '20px',
+        fontWeight: 700,
+    },
+    h6: {
+        fontSize: '18px',
+        fontWeight: 700,
+    },
+    subtitle1: {
+        fontSize: '16px',
+        fontWeight: 600,
+    },
+    subtitle2: {
+        fontSize: '14px',
+        fontWeight: 600,
+    },
+    body1: {
+        fontSize: '16px',
+        fontWeight: 400,
+    },
+    body2: {
+        fontSize: '14px',
+        fontWeight: 400,
+    },
+    caption: {
+        fontSize: '12px',
+        fontWeight: 400,
+    },
+};
+
 export function getGlobalTheme(
     systemTheme: ColorSchemeName,
     additionalProps?: Partial<Theme>,
-): DefaultTheme {
+): Theme {
     const colors = defaultColors[systemTheme ?? 'dark'];
     return {
-        colors: {
-            ...colors,
-            ...additionalProps?.colors,
-        },
-        typography: {
-            h1: {
-                fontSize: '64px',
-                fontWeight: 700,
-            },
-            h2: {
-                fontSize: '48px',
-                fontWeight: 700,
-            },
-            h3: {
-                fontSize: '32px',
-                fontWeight: 700,
-            },
-            h4: {
-                fontSize: '24px',
-                fontWeight: 700,
-            },
-            h5: {
-                fontSize: '20px',
-                fontWeight: 700,
-            },
-            h6: {
-                fontSize: '18px',
-                fontWeight: 700,
-            },
-            subtitle1: {
-                fontSize: '16px',
-                fontWeight: 600,
-            },
-            subtitle2: {
-                fontSize: '14px',
-                fontWeight: 600,
-            },
-            body1: {
-                fontSize: '16px',
-                fontWeight: 400,
-            },
-            body2: {
-                fontSize: '14px',
-                fontWeight: 400,
-            },
-            caption: {
-                fontSize: '12px',
-                fontWeight: 400,
-            },
-            ...additionalProps?.typography,
-        },
+        colors,
+        typography: defaultTypography,
         fontFamily: {
             en: {
                 regular: '',
@@ -208,7 +206,6 @@ export function getGlobalTheme(
                 medium: '',
                 bold: '',
             },
-            ...additionalProps?.fontFamily,
         },
         ...additionalProps,
     };
