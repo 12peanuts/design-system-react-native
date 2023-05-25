@@ -1,61 +1,17 @@
-import styled, { css } from '@emotion/native';
-import { TabItemProps } from './TabItem';
-import { TabMenuContextState, TabsContextState } from './TabsProvider';
-import { ScreenPadding } from '../../shared';
+import styled from '@emotion/native';
+import Animated from 'react-native-reanimated';
 
-type TabItemContainerProps = {
-    tabMenuColor: TabMenuContextState['tabMenuColor'];
-    tabMenuHorizontalPadding: TabMenuContextState['tabMenuHorizontalPadding'];
-    tabMenuVerticalPadding: TabMenuContextState['tabMenuVerticalPadding'];
-} & Omit<ActiveProps, 'activeBarHeight'>;
-
-interface ActiveProps extends Pick<TabItemProps, 'isActive'> {
-    activeBarHeight: TabsContextState['activeBarHeight'];
-    tabMenuType: TabsContextState['tabMenuType'];
-    activeColor: TabsContextState['activeColor'];
-}
-
-export const TabItemContainer = styled.TouchableOpacity<TabItemContainerProps>`
+export const TabItemButton = styled.TouchableOpacity`
     flex: 1;
+    padding: 12px 0 14px;
     align-items: center;
-    padding: 12px 16px;
-
-    ${(props) => {
-        const {
-            tabMenuType,
-            isActive,
-            theme,
-            activeColor,
-            tabMenuColor,
-            tabMenuVerticalPadding,
-            tabMenuHorizontalPadding,
-        } = props;
-        return css`
-            padding-top: ${ScreenPadding[tabMenuVerticalPadding]};
-            padding-bottom: ${ScreenPadding[tabMenuVerticalPadding]};
-            padding-left: ${ScreenPadding[tabMenuHorizontalPadding]};
-            padding-right: ${ScreenPadding[tabMenuHorizontalPadding]};
-            background-color: ${tabMenuType === 'solid'
-                ? isActive
-                    ? activeColor || theme.colors.primary
-                    : tabMenuColor
-                : tabMenuColor};
-        `;
-    }}
 `;
 
-export const ActiveBar = styled.View<ActiveProps>`
-    height: ${(props) => `${props.activeBarHeight}px`};
+export const ActiveBar = styled(Animated.View)`
+    height: 2px;
+    width: 100%;
+    background-color: ${(props) => props.theme.colors.primary};
     position: absolute;
     left: 0;
-    right: 0;
     bottom: 0;
-
-    ${(props) => {
-        const { activeBarHeight, isActive, activeColor, theme } = props;
-        return css`
-            height: ${activeBarHeight}px;
-            background-color: ${isActive ? activeColor || theme.colors.primary : undefined};
-        `;
-    }}
 `;

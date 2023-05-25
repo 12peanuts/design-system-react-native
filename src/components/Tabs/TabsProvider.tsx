@@ -1,70 +1,33 @@
-import React, { PropsWithChildren, createContext, useContext, useMemo } from 'react';
-import { TextProps } from '../Text';
-import { ScreenPaddingType } from '../../shared';
+import React, { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 
-export interface TabsContextState {
-    tabMenuType: 'underline' | 'solid';
-    tabMenuDisplay: 'flex' | 'inline';
-    activeColor: string;
-    activeBarHeight: number;
-}
-
-export interface TabMenuContextState {
-    tabMenuTextProps: TextProps;
-    tabMenuVerticalPadding: ScreenPaddingType;
-    tabMenuHorizontalPadding: ScreenPaddingType;
-    tabMenuColor: string;
+interface TabsContextState {
+    activeId: number;
+    updateActiveId: (index: number) => void;
 }
 
 const TabsContext = createContext<TabsContextState | null>(null);
-const TabMenuContext = createContext<TabMenuContextState | null>(null);
 
-export function TabsProvider({
-    children,
-    tabMenuType,
-    tabMenuDisplay,
-    activeColor,
-    activeBarHeight,
-    tabMenuColor,
-    tabMenuTextProps,
-    tabMenuHorizontalPadding,
-    tabMenuVerticalPadding,
-}: TabsContextState & TabMenuContextState & PropsWithChildren<unknown>) {
-    const tabContextValue = useMemo(
-        () => ({ tabMenuType, tabMenuDisplay, activeColor, activeBarHeight }),
-        [tabMenuDisplay, tabMenuType, activeColor, activeBarHeight],
-    );
-    const tabMenuContextValue = useMemo(
+export function TabsProvider({ children }: PropsWithChildren<unknown>) {
+    const [activeId, setActiveId] = useState(0);
+    const values = useMemo(
         () => ({
-            tabMenuColor,
-            tabMenuTextProps,
-            tabMenuVerticalPadding,
-            tabMenuHorizontalPadding,
+            activeId,
+            updateActiveId(id: number) {
+                if (activeId !== id) {
+                    setActiveId(id);
+                }
+            },
         }),
-        [tabMenuColor, tabMenuTextProps, tabMenuVerticalPadding, tabMenuHorizontalPadding],
+        [activeId],
     );
 
-    return (
-        <TabsContext.Provider value={tabContextValue}>
-            <TabMenuContext.Provider value={tabMenuContextValue}>
-                {children}
-            </TabMenuContext.Provider>
-        </TabsContext.Provider>
-    );
+    return <TabsContext.Provider value={values}>{children}</TabsContext.Provider>;
 }
 
 export function useTabsContext() {
     const context = useContext(TabsContext);
     if (context === null) {
-        throw new Error('useTabsContext must be used within a TabsContext');
-    }
-    return context;
-}
-
-export function useTabMenuContext() {
-    const context = useContext(TabMenuContext);
-    if (context === null) {
-        throw new Error('useTabMenuContext must be used within a TabMenuContext');
+        throw new Error('useTabsContext must be used within a TabContext');
     }
     return context;
 }

@@ -1,5 +1,7 @@
 import styled from '@emotion/native';
 
-export const TabsContainer = styled.View`
-    flex: 1;
+export const MenuContainer = styled.View`
+    flex-direction: row;
+    align-items: center;
+    background-color: ${(props) => props.theme.colors.gray800};
 `;
