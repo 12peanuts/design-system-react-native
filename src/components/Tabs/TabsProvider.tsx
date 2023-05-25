@@ -1,70 +1,41 @@
-import React, { PropsWithChildren, createContext, useContext, useMemo } from 'react';
-import { TextProps } from '../Text';
-import { ScreenPaddingType } from '../../shared';
+import React, { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 
-export interface TabsContextState {
-    tabMenuType: 'underline' | 'solid';
-    tabMenuDisplay: 'flex' | 'inline';
-    activeColor: string;
-    activeBarHeight: number;
+export interface TabsProviderProps {
+    onActiveTabChanged?: (index: number) => void;
 }
 
-export interface TabMenuContextState {
-    tabMenuTextProps: TextProps;
-    tabMenuVerticalPadding: ScreenPaddingType;
-    tabMenuHorizontalPadding: ScreenPaddingType;
-    tabMenuColor: string;
+interface TabsContextState {
+    activeIndex: number;
+    updateActiveIndex: (index: number) => void;
 }
 
 const TabsContext = createContext<TabsContextState | null>(null);
-const TabMenuContext = createContext<TabMenuContextState | null>(null);
 
 export function TabsProvider({
+    onActiveTabChanged,
     children,
-    tabMenuType,
-    tabMenuDisplay,
-    activeColor,
-    activeBarHeight,
-    tabMenuColor,
-    tabMenuTextProps,
-    tabMenuHorizontalPadding,
-    tabMenuVerticalPadding,
-}: TabsContextState & TabMenuContextState & PropsWithChildren<unknown>) {
-    const tabContextValue = useMemo(
-        () => ({ tabMenuType, tabMenuDisplay, activeColor, activeBarHeight }),
-        [tabMenuDisplay, tabMenuType, activeColor, activeBarHeight],
-    );
-    const tabMenuContextValue = useMemo(
+}: PropsWithChildren<TabsProviderProps>) {
+    const [activeIndex, setActiveIndex] = useState(0);
+    const values = useMemo(
         () => ({
-            tabMenuColor,
-            tabMenuTextProps,
-            tabMenuVerticalPadding,
-            tabMenuHorizontalPadding,
+            activeIndex,
+            updateActiveIndex(index: number) {
+                if (activeIndex !== index) {
+                    setActiveIndex(index);
+                    if (onActiveTabChanged) onActiveTabChanged(index);
+                }
+            },
         }),
-        [tabMenuColor, tabMenuTextProps, tabMenuVerticalPadding, tabMenuHorizontalPadding],
+        [activeIndex, onActiveTabChanged],
     );
 
-    return (
-        <TabsContext.Provider value={tabContextValue}>
-            <TabMenuContext.Provider value={tabMenuContextValue}>
-                {children}
-            </TabMenuContext.Provider>
-        </TabsContext.Provider>
-    );
+    return <TabsContext.Provider value={values}>{children}</TabsContext.Provider>;
 }
 
 export function useTabsContext() {
     const context = useContext(TabsContext);
     if (context === null) {
-        throw new Error('useTabsContext must be used within a TabsContext');
-    }
-    return context;
-}
-
-export function useTabMenuContext() {
-    const context = useContext(TabMenuContext);
-    if (context === null) {
-        throw new Error('useTabMenuContext must be used within a TabMenuContext');
+        throw new Error('useTabsContext must be used within a TabContext');
     }
     return context;
 }

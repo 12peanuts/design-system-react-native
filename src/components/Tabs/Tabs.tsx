@@ -1,89 +1,108 @@
-import React, { Children, ReactElement, isValidElement, useMemo, useState } from 'react';
+import React, { Children, ReactElement, isValidElement, useMemo } from 'react';
+import Animated from 'react-native-reanimated';
 import {
-    LayoutChangeEvent,
-    ScrollView,
+    NativeScrollEvent,
+    NativeSyntheticEvent,
     ScrollViewProps,
+    StyleProp,
     View,
     ViewStyle,
-    StyleProp,
 } from 'react-native';
-import { TabsMenu } from './TabsMenu';
-import { TabsContainer } from './Tabs.styles';
-import { TabMenuContextState, TabsContextState, TabsProvider } from './TabsProvider';
+import { TabMenuItem, TabMenuItemProps } from './TabMenuItem';
+import { TabsProvider, TabsProviderProps, useTabsContext } from './TabsProvider';
+import { ScrollProvider, useScrollContext } from './ScrollProvider';
+import { LayoutProvider, useLayoutContext } from './LayoutProvider';
+import { MenuContainer } from './Tabs.styles';
 
-export interface TabsProps extends ScrollViewProps {
-    tabMenuNames?: string[];
-    tabMenuType?: TabsContextState['tabMenuType'];
-    tabMenuDisplay?: TabsContextState['tabMenuDisplay'];
-    activeColor?: TabsContextState['activeColor'];
-    activeBarHeight?: TabsContextState['activeBarHeight'];
-    tabMenuTextProps?: TabMenuContextState['tabMenuTextProps'];
-    tabMenuColor?: TabMenuContextState['tabMenuColor'];
-    tabMenuVerticalPadding?: TabMenuContextState['tabMenuVerticalPadding'];
-    tabMenuHorizontalPadding?: TabMenuContextState['tabMenuHorizontalPadding'];
-    containerStyle?: StyleProp<ViewStyle>;
+export type TabData = Pick<TabMenuItemProps, 'label'>;
+export interface TabsProps<T> extends ScrollViewProps {
+    data: T[];
+    gap?: number;
+    tabMenuContainerStyle?: StyleProp<ViewStyle>;
+    activeBarStyle?: TabMenuItemProps['activeBarStyle'];
+    tabMenuLabelProps?: TabMenuItemProps['textProps'];
+    tabMenuLabelActiveColor?: TabMenuItemProps['textActiveColor'];
+    tabMenuLabelColor?: TabMenuItemProps['textColor'];
+    onActiveTabChanged?: TabsProviderProps['onActiveTabChanged'];
 }
 
-export function Tabs({
-    tabMenuType = 'underline',
-    tabMenuDisplay = 'inline',
-    tabMenuNames = [],
-    activeColor = 'black',
-    activeBarHeight = 1.5,
+function TabsMain<T extends TabData>({
+    data,
+    gap = 0,
     children: passedChildren,
-    tabMenuTextProps = { varient: 'h4' },
-    tabMenuColor = '#fff',
-    tabMenuVerticalPadding = 'Medium',
-    tabMenuHorizontalPadding = 'Medium',
-    containerStyle,
+    tabMenuContainerStyle,
+    activeBarStyle,
+    tabMenuLabelProps,
+    tabMenuLabelActiveColor,
+    tabMenuLabelColor,
     ...props
-}: TabsProps) {
-    const [width, setWidth] = useState(0);
-    const { children, menuNames } = useMemo(() => {
-        const overwrittenNames = tabMenuNames;
+}: TabsProps<T>) {
+    const { layout, handleLayout } = useLayoutContext();
+    const { scrollRef } = useScrollContext();
+    const { updateActiveIndex } = useTabsContext();
+    const children = useMemo(() => {
         const elements = Children.toArray(passedChildren)
             .filter((element) => isValidElement(element))
             .map((element, index) => {
-                const title = overwrittenNames[index] || `untitled${index + 1}`;
-                overwrittenNames[index] = title;
                 const reactElement = element as ReactElement;
                 return (
-                    <View key={title} style={{ width }}>
+                    <View
+                        key={data[index]?.label || `undefined-${index}`}
+                        style={{ width: layout.width }}
+                    >
                         {reactElement}
                     </View>
                 );
             });
+        return elements;
+    }, [data, layout.width, passedChildren]);
 
-        return { children: elements, menuNames: overwrittenNames };
-    }, [passedChildren, width, tabMenuNames]);
-
-    const handleLayout = (event: LayoutChangeEvent) => {
-        setWidth(event.nativeEvent.layout.width);
+    const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+        const pageIndex = Math.round(event.nativeEvent.contentOffset.x / layout.width);
+        updateActiveIndex(pageIndex);
     };
 
     return (
-        <TabsProvider
-            tabMenuType={tabMenuType}
-            tabMenuDisplay={tabMenuDisplay}
-            activeColor={activeColor}
-            activeBarHeight={activeBarHeight}
-            tabMenuTextProps={tabMenuTextProps}
-            tabMenuVerticalPadding={tabMenuVerticalPadding}
-            tabMenuHorizontalPadding={tabMenuHorizontalPadding}
-            tabMenuColor={tabMenuColor}
-        >
-            <TabsContainer onLayout={handleLayout} style={containerStyle}>
-                <TabsMenu data={menuNames} />
-                <ScrollView
-                    horizontal
-                    pagingEnabled
-                    bounces={false}
-                    showsHorizontalScrollIndicator={false}
-                    {...props}
-                >
-                    {children}
-                </ScrollView>
-            </TabsContainer>
+        <View>
+            <MenuContainer style={tabMenuContainerStyle}>
+                {data.map(({ label }, index) => (
+                    <TabMenuItem
+                        label={label}
+                        index={index}
+                        key={label}
+                        activeBarStyle={activeBarStyle}
+                        textProps={tabMenuLabelProps}
+                        textActiveColor={tabMenuLabelActiveColor}
+                        textColor={tabMenuLabelColor}
+                    />
+                ))}
+            </MenuContainer>
+            <Animated.ScrollView
+                ref={scrollRef}
+                horizontal
+                pagingEnabled
+                bounces={false}
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ gap }}
+                scrollEventThrottle={16}
+                onScroll={handleScroll}
+                onLayout={handleLayout}
+                {...props}
+            >
+                {children}
+            </Animated.ScrollView>
+        </View>
+    );
+}
+
+export function Tabs<T extends TabData>({ onActiveTabChanged, ...props }: TabsProps<T>) {
+    return (
+        <TabsProvider onActiveTabChanged={onActiveTabChanged}>
+            <ScrollProvider>
+                <LayoutProvider>
+                    <TabsMain {...props} />
+                </LayoutProvider>
+            </ScrollProvider>
         </TabsProvider>
     );
 }
