@@ -9,7 +9,7 @@ import {
     ViewStyle,
 } from 'react-native';
 import { TabMenuItem, TabMenuItemProps } from './TabMenuItem';
-import { TabsProvider, useTabsContext } from './TabsProvider';
+import { TabsProvider, TabsProviderProps, useTabsContext } from './TabsProvider';
 import { ScrollProvider, useScrollContext } from './ScrollProvider';
 import { LayoutProvider, useLayoutContext } from './LayoutProvider';
 import { MenuContainer } from './Tabs.styles';
@@ -23,6 +23,7 @@ export interface TabsProps<T> extends ScrollViewProps {
     tabMenuLabelProps?: TabMenuItemProps['textProps'];
     tabMenuLabelActiveColor?: TabMenuItemProps['textActiveColor'];
     tabMenuLabelColor?: TabMenuItemProps['textColor'];
+    onActiveTabChanged?: TabsProviderProps['onActiveTabChanged'];
 }
 
 function TabsMain<T extends TabData>({
@@ -38,7 +39,7 @@ function TabsMain<T extends TabData>({
 }: TabsProps<T>) {
     const { layout, handleLayout } = useLayoutContext();
     const { scrollRef } = useScrollContext();
-    const { updateActiveId } = useTabsContext();
+    const { updateActiveIndex } = useTabsContext();
     const children = useMemo(() => {
         const elements = Children.toArray(passedChildren)
             .filter((element) => isValidElement(element))
@@ -58,7 +59,7 @@ function TabsMain<T extends TabData>({
 
     const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
         const pageIndex = Math.round(event.nativeEvent.contentOffset.x / layout.width);
-        updateActiveId(pageIndex);
+        updateActiveIndex(pageIndex);
     };
 
     return (
@@ -67,7 +68,7 @@ function TabsMain<T extends TabData>({
                 {data.map(({ label }, index) => (
                     <TabMenuItem
                         label={label}
-                        id={index}
+                        index={index}
                         key={label}
                         activeBarStyle={activeBarStyle}
                         textProps={tabMenuLabelProps}
@@ -94,9 +95,9 @@ function TabsMain<T extends TabData>({
     );
 }
 
-export function Tabs<T extends TabData>(props: TabsProps<T>) {
+export function Tabs<T extends TabData>({ onActiveTabChanged, ...props }: TabsProps<T>) {
     return (
-        <TabsProvider>
+        <TabsProvider onActiveTabChanged={onActiveTabChanged}>
             <ScrollProvider>
                 <LayoutProvider>
                     <TabsMain {...props} />

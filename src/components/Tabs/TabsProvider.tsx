@@ -1,24 +1,32 @@
 import React, { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 
+export interface TabsProviderProps {
+    onActiveTabChanged?: (index: number) => void;
+}
+
 interface TabsContextState {
-    activeId: number;
-    updateActiveId: (index: number) => void;
+    activeIndex: number;
+    updateActiveIndex: (index: number) => void;
 }
 
 const TabsContext = createContext<TabsContextState | null>(null);
 
-export function TabsProvider({ children }: PropsWithChildren<unknown>) {
-    const [activeId, setActiveId] = useState(0);
+export function TabsProvider({
+    onActiveTabChanged,
+    children,
+}: PropsWithChildren<TabsProviderProps>) {
+    const [activeIndex, setActiveIndex] = useState(0);
     const values = useMemo(
         () => ({
-            activeId,
-            updateActiveId(id: number) {
-                if (activeId !== id) {
-                    setActiveId(id);
+            activeIndex,
+            updateActiveIndex(index: number) {
+                if (activeIndex !== index) {
+                    setActiveIndex(index);
+                    if (onActiveTabChanged) onActiveTabChanged(index);
                 }
             },
         }),
-        [activeId],
+        [activeIndex, onActiveTabChanged],
     );
 
     return <TabsContext.Provider value={values}>{children}</TabsContext.Provider>;

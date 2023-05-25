@@ -10,7 +10,7 @@ import { Text, TextProps } from '../Text';
 
 export interface TabMenuItemProps {
     label: string;
-    id: number;
+    index: number;
     textProps?: TextProps;
     textColor?: string;
     textActiveColor?: string;
@@ -19,7 +19,7 @@ export interface TabMenuItemProps {
 
 export function TabMenuItem({
     label,
-    id = 0,
+    index = 0,
     activeOpacity = 0.8,
     onPress,
     textProps,
@@ -27,12 +27,12 @@ export function TabMenuItem({
     textColor,
     textActiveColor,
     ...props
-}: TabMenuItemProps & Omit<TouchableOpacityProps, 'id'>) {
+}: TabMenuItemProps & Omit<TouchableOpacityProps, 'index'>) {
     const { colors } = useTheme();
-    const { activeId, updateActiveId } = useTabsContext();
+    const { activeIndex, updateActiveIndex } = useTabsContext();
     const { scrollTo } = useScrollContext();
     const { layout } = useLayoutContext();
-    const isActive = activeId === id;
+    const isActive = activeIndex === index;
     const animStyle = useAnimatedStyle(() => ({
         transform: [
             {
@@ -42,8 +42,8 @@ export function TabMenuItem({
     }));
 
     const handlePress = (event: GestureResponderEvent) => {
-        updateActiveId(id);
-        scrollTo({ x: id * layout.width, animated: false });
+        updateActiveIndex(index);
+        scrollTo({ x: index * layout.width, animated: false });
         if (onPress) onPress(event);
     };
 
