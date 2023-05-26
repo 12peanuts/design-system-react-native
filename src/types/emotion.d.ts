@@ -1,5 +1,5 @@
 import '@emotion/react';
-import type { DefaultTheme } from 'src/theme/theme';
+import type { DefaultTheme } from '../theme';
 
 declare module '@emotion/react' {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface

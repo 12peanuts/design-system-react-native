@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
-import { Theme, ThemeProvider as ThemeProviderBase } from '@emotion/react';
 import { Appearance } from 'react-native';
+import { Theme, ThemeProvider as ThemeProviderBase } from '@emotion/react';
 import { getGlobalTheme } from './theme';
 
 interface ThemeProviderProps {
