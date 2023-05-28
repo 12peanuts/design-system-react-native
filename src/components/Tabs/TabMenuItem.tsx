@@ -36,7 +36,9 @@ export function TabMenuItem({
     const animStyle = useAnimatedStyle(() => ({
         transform: [
             {
-                scaleX: withSpring(isActive ? 1 : 0),
+                scaleX: withSpring(isActive ? 1 : 0, {
+                    overshootClamping: true,
+                }),
             },
         ],
     }));
