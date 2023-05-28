@@ -11,4 +11,5 @@ export * from './components/Tabs';
 export * from './components/Tag';
 export * from './components/Tooltip';
 export * from './components/Popup';
+export * from './components/ProgressBar';
 export * from './theme';
