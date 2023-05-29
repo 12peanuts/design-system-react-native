@@ -5,15 +5,15 @@ import { Text, TextProps } from '@12peanuts/design-system-react-native';
 import { ChipItemContainer, WrappedImage } from './ChipItem.styles';
 import { ComponentType, RadiusType } from '../../shared';
 
-export interface ChipDataBase {
-    text?: string;
+export interface ChipData {
+    label?: string;
     iconSrc?: ImageSourcePropType;
 }
 
 export interface ChipItemStyleProps extends TouchableOpacityProps {
     type?: ComponentType;
     radius?: RadiusType;
-    textProps?: TextProps;
+    labelProps?: TextProps;
     spacing?: number;
     selected?: boolean;
     activeColor?: string;
@@ -21,20 +21,20 @@ export interface ChipItemStyleProps extends TouchableOpacityProps {
 }
 
 export function ChipItem({
-    text,
+    label,
     iconSrc,
     type = 'contained',
     radius,
-    textProps,
+    labelProps,
     spacing = 8,
     selected = false,
     activeOpacity = 0.7,
     activeColor,
     inactiveColor,
     ...props
-}: ChipDataBase & ChipItemStyleProps) {
+}: ChipData & ChipItemStyleProps) {
     const { colors } = useTheme();
-    const iconMarginRight = text ? spacing : 0;
+    const iconMarginRight = label ? spacing : 0;
 
     return (
         <ChipItemContainer
@@ -47,7 +47,7 @@ export function ChipItem({
             {...props}
         >
             {iconSrc && <WrappedImage source={iconSrc} style={{ marginRight: iconMarginRight }} />}
-            {text && (
+            {label && (
                 <Text
                     color={
                         type === 'contained'
@@ -56,9 +56,9 @@ export function ChipItem({
                             ? activeColor || colors.primary
                             : colors.text100
                     }
-                    {...textProps}
+                    {...labelProps}
                 >
-                    {text}
+                    {label}
                 </Text>
             )}
         </ChipItemContainer>

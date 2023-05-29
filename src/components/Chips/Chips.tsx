@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, FlatListProps, ListRenderItemInfo, StyleProp, ViewStyle } from 'react-native';
-import { ChipItem, ChipDataBase, ChipItemStyleProps } from './ChipItem';
+import { ChipItem, ChipData, ChipItemStyleProps } from './ChipItem';
 import { ChipsProvider, useChipsContext } from './ChipsProvider';
 import { ChipsContainer } from './Chips.styles';
 
@@ -11,7 +11,7 @@ export interface ChipsProps<T> extends Omit<FlatListProps<T>, 'renderItem'> {
     chipItemStyle?: ChipItemStyleProps;
 }
 
-function Chips<T extends ChipDataBase>({
+function Chips<T extends ChipData>({
     data,
     spacing = 8,
     chipItemStyle,
@@ -30,7 +30,7 @@ function Chips<T extends ChipDataBase>({
 
         return (
             <ChipItem
-                text={item.text}
+                label={item.label}
                 iconSrc={item.iconSrc}
                 key={index}
                 selected={selectedIdx === index}
@@ -55,7 +55,7 @@ function Chips<T extends ChipDataBase>({
     );
 }
 
-function WrappedChips<T extends ChipDataBase>(props: ChipsProps<T>) {
+function WrappedChips<T extends ChipData>(props: ChipsProps<T>) {
     return (
         <ChipsProvider>
             <Chips {...props} />
