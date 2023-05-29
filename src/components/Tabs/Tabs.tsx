@@ -24,6 +24,7 @@ export interface TabsProps<T> extends ScrollViewProps {
     tabMenuLabelActiveColor?: TabMenuItemProps['textActiveColor'];
     tabMenuLabelColor?: TabMenuItemProps['textColor'];
     onActiveTabChanged?: TabsProviderProps['onActiveTabChanged'];
+    hideActiveBar?: TabMenuItemProps['hideActiveBar'];
 }
 
 function TabsMain<T extends TabData>({
@@ -35,6 +36,7 @@ function TabsMain<T extends TabData>({
     tabMenuLabelProps,
     tabMenuLabelActiveColor,
     tabMenuLabelColor,
+    hideActiveBar = false,
     ...props
 }: TabsProps<T>) {
     const { layout, handleLayout } = useLayoutContext();
@@ -74,6 +76,7 @@ function TabsMain<T extends TabData>({
                         textProps={tabMenuLabelProps}
                         textActiveColor={tabMenuLabelActiveColor}
                         textColor={tabMenuLabelColor}
+                        hideActiveBar={hideActiveBar}
                     />
                 ))}
             </MenuContainer>

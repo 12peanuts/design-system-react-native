@@ -15,6 +15,7 @@ export interface TabMenuItemProps {
     textColor?: string;
     textActiveColor?: string;
     activeBarStyle?: ViewStyle;
+    hideActiveBar?: boolean;
 }
 
 export function TabMenuItem({
@@ -26,6 +27,7 @@ export function TabMenuItem({
     activeBarStyle,
     textColor,
     textActiveColor,
+    hideActiveBar = false,
     ...props
 }: TabMenuItemProps & Omit<TouchableOpacityProps, 'index'>) {
     const { colors } = useTheme();
@@ -59,7 +61,7 @@ export function TabMenuItem({
             >
                 {label}
             </Text>
-            {isActive && <ActiveBar style={[animStyle, activeBarStyle]} />}
+            {!hideActiveBar && isActive && <ActiveBar style={[animStyle, activeBarStyle]} />}
         </TabItemButton>
     );
 }
