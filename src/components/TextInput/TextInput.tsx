@@ -41,6 +41,7 @@ export const TextInput: React.FC<TextInputProps> = ({
     multiline,
     height,
     backgroundColor,
+    value,
     ...props
 }) => {
     const handleChangeText = (text: string) => {
@@ -69,12 +70,13 @@ export const TextInput: React.FC<TextInputProps> = ({
                 backgroundColor={backgroundColor}
             >
                 <Input
+                    value={value}
                     onChangeText={handleChangeText}
                     multiline={multiline}
                     {...textProps}
                     {...props}
                 />
-                {canClean && (
+                {canClean && value && (
                     <ClearButton
                         type="ghost"
                         iconSrc={CleanIcon}
