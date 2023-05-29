@@ -2,12 +2,16 @@ import styled, { css } from '@emotion/native';
 import { ScreenPadding } from '../../shared';
 import type { LayoutProps } from './Layout';
 
-export const LayoutContainer = styled.View<LayoutProps>`
+type LayoutContainerProps = Omit<LayoutProps, 'spacing'> & {
+    spacing: number;
+};
+
+export const LayoutContainer = styled.View<LayoutContainerProps>`
     ${(props) => {
         const padding = ScreenPadding[props.paddingAll || 'None'];
         return css`
-            flex: ${props.flex ? `${props.flex}` : undefined};
-            gap: ${`${props.spacing || 12}px`};
+            flex: ${props.flex};
+            gap: ${`${props.spacing}px`};
             flex-direction: ${props.orientation === 'horizontal' ? 'row' : 'column'};
             padding-top: ${props.paddingTop ? ScreenPadding[props.paddingTop] : padding};
             padding-bottom: ${props.paddingBottom ? ScreenPadding[props.paddingBottom] : padding};
