@@ -5,7 +5,7 @@ import { RadiusSize } from '../../shared';
 export const ChipItemContainer = styled.TouchableOpacity<ChipItemStyleProps>`
     flex-direction: row;
     align-items: center;
-    padding: 10px 16px;
+    padding: 7px 16px 8px;
     border-radius: ${(props) => RadiusSize[props.radius || 'Circle']};
 
     ${(props) => {
