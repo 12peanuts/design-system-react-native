@@ -36,7 +36,7 @@ function TabsMain<T extends TabData>({
     tabMenuLabelProps,
     tabMenuLabelActiveColor,
     tabMenuLabelColor,
-    hideActiveBar = false,
+    hideActiveBar,
     ...props
 }: TabsProps<T>) {
     const { layout, handleLayout } = useLayoutContext();
