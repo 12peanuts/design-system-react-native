@@ -9,6 +9,7 @@ export * from './components/Text';
 export * from './components/TextInput';
 export * from './components/Tabs';
 export * from './components/Tag';
+export * from './components/Toast';
 export * from './components/Tooltip';
 export * from './components/Popup';
 export * from './theme';
