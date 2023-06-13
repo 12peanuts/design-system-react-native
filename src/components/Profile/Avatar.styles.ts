@@ -21,5 +21,4 @@ export const ActionIcon = styled.Image`
     bottom: 0;
     right: 0;
     border-radius: ${RadiusSize.Circle};
-    border: 2px solid ${(props) => props.theme.colors.white};
 `;
