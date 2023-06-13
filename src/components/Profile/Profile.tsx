@@ -44,6 +44,7 @@ export function Profile({
                 actionIcon={avatarActionIcon}
                 size={avatarSize}
                 onPress={onPressAvatar}
+                disabled={onPressAvatar === undefined}
             />
             {(title || subtitle) && (
                 <Layout spacing={0}>
