@@ -34,7 +34,7 @@ export default function App() {
 }
 ```
 
-⚠️ if you want to use `Tabs`, you need to install [react-native-reanimated(>=2.7.0)](https://github.com/software-mansion/react-native-reanimated) first.
+⚠️ if you want to use `Tabs`, you need to install [react-native-reanimated(3.1.0)](https://github.com/software-mansion/react-native-reanimated) first.
 
 
 ## Tutorials
