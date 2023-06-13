@@ -24,10 +24,10 @@ And then you have to set your theme props with `getGlobalTheme()`.
 // in App.tsx
 
 import React from 'react';
-import { ThemeProvider, getGlobaltheme } from '@12peanuts/design-system-react-native';
+import { ThemeProvider, getDefaultTheme } from '@12peanuts/design-system-react-native';
 
 export default function App() {
-    const theme = getGlobalTheme('dark', {
+    const theme = getDefaultTheme('dark', {
         deviceSize: {
             width: 300,
             height: 300,
