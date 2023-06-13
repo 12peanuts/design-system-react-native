@@ -13,6 +13,7 @@ export const LayoutContainer = styled.View<LayoutContainerProps>`
             flex: ${props.flex};
             gap: ${`${props.spacing}px`};
             flex-direction: ${props.orientation === 'horizontal' ? 'row' : 'column'};
+            align-items: ${props.orientation === 'horizontal' ? 'center' : 'stretch'};
             padding-top: ${props.paddingTop ? ScreenPadding[props.paddingTop] : padding};
             padding-bottom: ${props.paddingBottom ? ScreenPadding[props.paddingBottom] : padding};
             padding-left: ${props.paddingLeft ? ScreenPadding[props.paddingLeft] : padding};
