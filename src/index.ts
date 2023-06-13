@@ -1,4 +1,3 @@
-export * from './components/Avatar';
 export * from './components/Badge';
 export * from './components/Button';
 export * from './components/Checkbox';
@@ -9,7 +8,9 @@ export * from './components/Text';
 export * from './components/TextInput';
 export * from './components/Tabs';
 export * from './components/Tag';
+export * from './components/Toast';
 export * from './components/Tooltip';
 export * from './components/Popup';
 export * from './components/ProgressBar';
+export * from './components/Profile';
 export * from './theme';

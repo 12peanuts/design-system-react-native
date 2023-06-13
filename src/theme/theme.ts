@@ -86,7 +86,7 @@ export interface DefaultTheme {
     };
 }
 
-const defaultColors: {
+export const defaultColors: {
     light: DefaultTheme['colors'];
     dark: DefaultTheme['colors'];
 } = {
@@ -187,7 +187,7 @@ const defaultTypography: DefaultTheme['typography'] = {
     },
 };
 
-export function getGlobalTheme(
+export function getDefaultTheme(
     systemTheme: ColorSchemeName,
     additionalProps?: Partial<Theme>,
 ): Theme {
